@@ -37,11 +37,11 @@ const myCharacters = [
 
 // --- LocalStorage keys & client id ---
 const LS_KEYS = {
-    LIKES: 'kaf_likes',           // { postId: count, ... }
-    USER_LIKES: 'kaf_user_likes', // { postId: true, ... }
-    CHAR_LIKES: 'kaf_char_likes', // { charId: count, ... }
-    USER_CHAR_LIKES: 'kaf_user_char_likes', // { charId: true, ... }
-    COMMENTS: 'kaf_comments',     // { postId: [ { id, name, text, timestamp, clientId } ] }
+    LIKES: 'kaf_likes',
+    USER_LIKES: 'kaf_user_likes',
+    CHAR_LIKES: 'kaf_char_likes',
+    USER_CHAR_LIKES: 'kaf_user_char_likes',
+    COMMENTS: 'kaf_comments',
     USERNAME: 'kaf_username',
     CLIENT_ID: 'kaf_client_id'
 };
@@ -54,34 +54,16 @@ function getClientId() {
     }
     return id;
 }
-const CLIENT_ID = getClientId();
-
-// --- USER "AUTHENTICATION" VIA LOCALSTORAGE ---
-function getCurrentUser() {
-    // Returns a pseudo-user object
-    const clientId = getClientId();
-    const username = getSavedUsername();
-    return username ? { clientId, username } : null;
+function getUsername() {
+    return localStorage.getItem(LS_KEYS.USERNAME) || 'Anonymous';
 }
-function signUpLocal(email, password, username) {
-    if (!email || !password || !username) return false;
-    if (username.length < 3) return false;
-    setSavedUsername(username);
-    localStorage.setItem('user_email', email);
-    localStorage.setItem('user_password', password); // For demo only, not secure!
-    return true;
-}
-function logInLocal(email, password) {
-    return localStorage.getItem('user_email') === email &&
-        localStorage.getItem('user_password') === password;
-}
-function logOutLocal() {
-    localStorage.removeItem(LS_KEYS.USERNAME);
-    localStorage.removeItem('user_email');
-    localStorage.removeItem('user_password');
+function setUsername(name) {
+    if (typeof name === 'string') {
+        localStorage.setItem(LS_KEYS.USERNAME, name.trim());
+    }
 }
 
-// --- TRANSLATION FUNCTION ---
+// --- TRANSLATION FUNCTION (unchanged, just keep using it) ---
 function setLanguage(lang) {
     if (!translations || !translations[lang]) return;
     currentLang = lang;
@@ -140,14 +122,6 @@ function _getCommentsMap() {
 }
 function _saveCommentsMap(map) {
     localStorage.setItem(LS_KEYS.COMMENTS, JSON.stringify(map));
-}
-function getSavedUsername() {
-    return localStorage.getItem(LS_KEYS.USERNAME) || '';
-}
-function setSavedUsername(name) {
-    if (typeof name === 'string') {
-        localStorage.setItem(LS_KEYS.USERNAME, name.trim());
-    }
 }
 function generateId(prefix = 'id') {
     return prefix + '_' + Math.random().toString(36).slice(2, 9);
@@ -406,7 +380,7 @@ function renderCharacterForm(charId, formId) {
     }
 }
 
-// --- LIKES ---
+// --- LIKES: No account required ---
 function toggleLike(postId) {
     let userLikes = _getUserLikes();
     let likesMap = _getLikesMap();
@@ -432,7 +406,7 @@ function updateLikeButton(postId) {
     likeButton.classList.toggle('liked', userHasLiked);
 }
 
-// --- CHARACTER LIKES ---
+// --- CHARACTER LIKES: No account required ---
 function toggleCharacterLike(charId) {
     let userCharLikes = _getUserCharLikes();
     let charLikesMap = _getCharLikesMap();
@@ -458,7 +432,7 @@ function updateCharacterLikeButton(charId) {
     likeButton.classList.toggle('liked', userHasLiked);
 }
 
-// --- COMMENTS ---
+// --- COMMENTS: No account required, uses device ID and optional display name ---
 function loadComments(postId) {
     const commentsContainer = document.getElementById(`comments-${postId}`);
     if (!commentsContainer) return;
@@ -473,28 +447,28 @@ function loadComments(postId) {
         const commentElement = document.createElement('div');
         commentElement.classList.add('comment');
         let deleteButton = '';
-        const currentUser = getCurrentUser();
-        if (currentUser && comment.clientId === currentUser.clientId) {
+        if (comment.clientId === getClientId()) {
             deleteButton = `<button class="delete-btn" onclick="deleteComment('${comment.id}', '${postId}')">Delete</button>`;
         }
         const displayName = comment.name || 'Anonymous';
-        commentElement.innerHTML = `<p><strong>${displayName}:</strong> ${escapeHtml(comment.text)}</p>${deleteButton}`;
+        commentElement.innerHTML = `<p><strong>${escapeHtml(displayName)}:</strong> ${escapeHtml(comment.text)}</p>${deleteButton}`;
         commentsContainer.appendChild(commentElement);
     });
 }
 function addComment(postId) {
-    const currentUser = getCurrentUser();
-    if (!currentUser) { alert(translations[currentLang].alert_comment); return; }
     const commentInput = document.getElementById(`comment-input-${postId}`);
     const commentText = commentInput.value.trim();
-    if (commentText === '') { alert(translations[currentLang].alert_comment_empty); return; }
+    if (commentText === '') {
+        alert(translations[currentLang].alert_comment_empty || "Comment cannot be empty!");
+        return;
+    }
     const commentsMap = _getCommentsMap();
     const newComment = {
         id: generateId('comment'),
-        name: currentUser.username,
+        name: getUsername(),
         text: commentText,
         timestamp: Date.now(),
-        clientId: currentUser.clientId
+        clientId: getClientId()
     };
     commentsMap[postId] = commentsMap[postId] || [];
     commentsMap[postId].push(newComment);
@@ -509,78 +483,55 @@ function deleteComment(commentId, postId) {
     loadComments(postId);
 }
 
-// --- USERNAME ---
+// --- USERNAME (display name, optional, local only) ---
 function saveUsername() {
     const usernameInput = document.getElementById('username-input');
     if (!usernameInput) return;
     const newUsername = usernameInput.value.trim();
     if (newUsername.length < 3) {
-        alert(translations[currentLang].alert_username_length);
+        alert(translations[currentLang].alert_username_length || "Username must be at least 3 characters.");
         return;
     }
-    setSavedUsername(newUsername);
-    alert(translations[currentLang].alert_username_saved);
+    setUsername(newUsername);
+    alert(translations[currentLang].alert_username_saved || "Username saved!");
     const welcomeMessage = document.getElementById('welcome-message');
     if (welcomeMessage) {
         welcomeMessage.textContent = `Welcome, ${newUsername}`;
     }
 }
 
-// --- MAIN AUTH STATE CONTROLLER (Local Only) ---
-function updateUIOnAuth() {
-    const currentUser = getCurrentUser();
+// --- MAIN UI CONTROLLER ---
+function updateUIOnLoad() {
+    const username = getUsername();
     const onIndexPage = document.getElementById('post-grid');
-    const onLoginPage = document.querySelector('body #auth-container');
-    const onProfilePage = document.getElementById('profile-page-container');
-    if (currentUser) {
-        const displayName = currentUser.username;
-        if (onLoginPage) {
-            window.location.href = 'index.html';
-            return;
-        }
-        if (onIndexPage) {
-            const userProfileEl = document.getElementById('user-profile');
-            const loginLinkContainer = document.getElementById('login-link-container');
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.textContent = `Welcome, ${displayName}`;
-            userProfileEl.classList.remove('hidden');
-            loginLinkContainer.classList.add('hidden');
-        }
-        if (onProfilePage) {
-            document.getElementById('profile-email-display').textContent = localStorage.getItem('user_email') || '';
-            document.getElementById('username-input').value = currentUser.username || '';
-        }
-    } else {
-        if (onProfilePage) {
-            alert(translations[currentLang].alert_login_protected);
-            window.location.href = 'login.html';
-            return;
-        }
-        if (onIndexPage) {
-            document.getElementById('user-profile').classList.add('hidden');
-            document.getElementById('login-link-container').classList.remove('hidden');
+    if (onIndexPage) {
+        const welcomeMessage = document.getElementById('welcome-message');
+        if (welcomeMessage) {
+            welcomeMessage.textContent = `Welcome, ${username}`;
         }
     }
+    // Optionally show/hide username setting UI
 }
 
 // --- SHARE POST ---
 function sharePost(postId) {
     let post = myPosts.find(p => p.id === postId) || fanartPosts.find(p => p.id === postId);
     if (!post) return;
-    const shareData = { title: `KennyChris's Art`, text: `Check out this artwork: "${translations[currentLang][post.titleKey]}"`, url: window.location.href };
+    const url = window.location.href;
+    const shareData = { title: `KennyChris's Art`, text: `Check out: "${translations[currentLang][post.titleKey]}"`, url };
     if (navigator.share) {
         navigator.share(shareData).catch(err => console.error('Share failed:', err));
     } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert(translations[currentLang].alert_link_copied);
+        navigator.clipboard.writeText(url);
+        alert(translations[currentLang].alert_link_copied || "Link copied!");
     }
 }
 function copyRSSLink() {
     const rssUrl = window.location.origin + '/feed.xml';
     navigator.clipboard.writeText(rssUrl).then(() => {
-        alert(translations[currentLang].alert_rss_copied);
+        alert(translations[currentLang].alert_rss_copied || "RSS link copied!");
     }).catch(err => {
-        console.error('Error al intentar copiar el enlace RSS: ', err);
+        console.error('Error copying RSS link:', err);
     });
 }
 function filterByTag(tag) {
@@ -589,6 +540,7 @@ function filterByTag(tag) {
 
 // --- INITIALIZE THE WEBSITE ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Language toggle
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
         const handleLanguageToggle = () => {
@@ -597,13 +549,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         langToggle.addEventListener('click', handleLanguageToggle);
         langToggle.addEventListener('touchend', (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             handleLanguageToggle();
         });
     }
     const savedLang = localStorage.getItem('language') || 'en';
     setLanguage(savedLang);
 
+    // Search
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -622,6 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Character search
     const characterSearchInput = document.getElementById('character-search-input');
     if (characterSearchInput) {
         characterSearchInput.addEventListener('input', () => {
@@ -629,39 +583,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Local Auth: signup, login, logout
-    updateUIOnAuth();
+    // Username set
+    const usernameInput = document.getElementById('username-input');
+    const usernameBtn = document.getElementById('username-btn');
+    if (usernameInput && usernameBtn) {
+        usernameInput.value = getUsername();
+        usernameBtn.addEventListener('click', saveUsername);
+    }
 
-    const signupBtn = document.getElementById('signup-btn');
-    if (signupBtn) {
-        signupBtn.addEventListener('click', () => {
-            const email = document.getElementById('email-signup').value;
-            const password = document.getElementById('password-signup').value;
-            const username = document.getElementById('username-signup').value.trim();
-            if (signUpLocal(email, password, username)) {
-                window.location.href = 'index.html';
-            } else {
-                alert('Sign up failed. Make sure all fields are filled and username is at least 3 characters.');
-            }
-        });
-    }
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-            const email = document.getElementById('email-login').value;
-            const password = document.getElementById('password-login').value;
-            if (logInLocal(email, password)) {
-                window.location.href = 'index.html';
-            } else {
-                alert('Login failed. Check your email and password.');
-            }
-        });
-    }
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            logOutLocal();
-            window.location.href = 'login.html';
-        });
-    }
+    updateUIOnLoad();
 });
