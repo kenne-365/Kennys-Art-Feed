@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenny's Art Feed</title>
+    
+    <meta property="og:title" content="Kenny's Art Feed!">
+    <meta property="og:description" content="KennyChris' personal website for art, characters, and animations.">
+    <meta property="og:image" content="https://kennychris.nekoweb.org/embed_thumbnail.png">
+    <meta property="og:url" content="https://kennychris.nekoweb.org">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css?v=31">
+    <link rel="alternate" type="application/rss+xml" title="Kenny's Art Feed" href="feed.xml">
+</head>
+<body class="homepage">
+
+    <header>
+        <h1 data-translate="main_title">Kenny's Art Feed!</h1>
+        <nav id="user-nav">
+            <button id="lang-toggle" class="nav-link">ES/EN</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <input type="search" id="search-input" class="search-input" data-translate-placeholder="search_placeholder">
+        </div>
+
+        <div class="main-nav">
+            <a href="characters.html" class="nav-link" data-translate="characters_title">Characters</a>
+        </div>
+        
+        <h2 data-translate="latest_posts">Latest Posts</h2>
+        <div id="post-grid" class="post-container"></div>
+
+        <h2 data-translate="fanart_showcase">Fanart Showcase</h2>
+        <div id="fanart-grid" class="post-container"></div>
+    </main>
+
+    <footer>
+        <a href="fanart.html" class="nav-link" data-translate="fanart_submission">Submit Your Fanart!</a>
+        <p style="margin-top: 20px;" data-translate="copyright">&copy; 2025 KennyChris. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database-compat.js"></script>
+    
+    <script src="translations.js?v=29"></script>
+    <script src="app.js?v=29"></script>
+
+</body>
+</html>
