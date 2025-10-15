@@ -18,19 +18,19 @@ const myCharacters = [
         forms: [{
             formId: "main", nameKey: "char_name_kenny", refSheetUrl: "characters/kenny_ref.png",
             quoteKey: "char_kenny_quote", descriptionKey: "char_kenny_description", designNotesKey: "char_kenny_designNotes",
-            specificInfo: { fullName: "char_kenny_fullName", species: "char_kenny_species", age: "char_kenny_age", gender: "char_kenny_gender", pronouns: "char_kenny_pronouns", height: "char_kenny_height", weight: "char_kenny_weight", build: "char_kenny_build" }
+            specificInfo: { fullName: "char_kenny_fullName", species: "char_kenny_species", age: "char_kenny_age", gender: "char_kenny_gender", pronouns: "char_kenny_pronouns", height: "char_kenny_height" }
         }]
     },
     {
         id: "lane", nameKey: "char_name_lane", iconUrl: "characters/icons/lane_icon.gif",
         tags: ["Shapeshifter", "Furry", "Fursona"],
-        baseInfo: { sexuality: "char_lane_sexuality", status: "char_lane_status", build: "char_lane_build", occupation: "char_lane_occupation", language: "char_lane_language", disorders: "char_lane_disorders", magic: "char_lane_magic" },
+        baseInfo: { sexuality: "char_lane_sexuality", status: "char_lane_status", build: "char_lane_build", occupation: "char_lane_occupation", language: "char_lane_language", disorders: "char_lane_disorders" },
         forms: [
-            { formId: "main", nameKey: "char_name_lane", refSheetUrl: "characters/lane_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lane_designNotes", specificInfo: { fullName: "char_lane_fullName", species: "char_lane_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lane_pronouns", height: "char_lane_height", weight: "char_lane_weight" } },
-            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "characters/lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname", species: "char_lynn_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lynn_pronouns", height: "char_lynn_height", weight: "char_lynn_weight" } },
-            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "characters/lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname", species: "char_lex_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lex_pronouns", height: "char_lex_height", weight: "char_lex_weight" } },
-            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname", species: "char_lee_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lee_pronouns", height: "char_lee_height", weight: "char_lee_weight" } },
-            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname", species: "char_loren_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_loren_pronouns", height: "char_loren_height", weight: "char_loren_weight" } }
+            { formId: "main", nameKey: "char_name_lane", refSheetUrl: "characters/lane_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lane_designNotes", specificInfo: { fullName: "char_lane_fullName", nickname: "char_lane_nickname", species: "char_lane_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lane_pronouns", height: "char_lane_height" } },
+            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "characters/lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname" } },
+            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "characters/lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname" } },
+            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" } },
+            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" } }
         ]
     }
 ];
@@ -38,7 +38,7 @@ const myCharacters = [
 // --- LocalStorage keys & client id ---
 const LS_KEYS = {
     LIKES: 'kaf_likes',           // { postId: count, ... }
-    USER_LIKES: 'kaf_user_likes', // { postId: true, ... } (which posts this browser liked)
+    USER_LIKES: 'kaf_user_likes', // { postId: true, ... }
     CHAR_LIKES: 'kaf_char_likes', // { charId: count, ... }
     USER_CHAR_LIKES: 'kaf_user_char_likes', // { charId: true, ... }
     COMMENTS: 'kaf_comments',     // { postId: [ { id, name, text, timestamp, clientId } ] }
@@ -56,7 +56,32 @@ function getClientId() {
 }
 const CLIENT_ID = getClientId();
 
-// --- TRANSLATION FUNCTION (keeps your original behaviour) ---
+// --- USER "AUTHENTICATION" VIA LOCALSTORAGE ---
+function getCurrentUser() {
+    // Returns a pseudo-user object
+    const clientId = getClientId();
+    const username = getSavedUsername();
+    return username ? { clientId, username } : null;
+}
+function signUpLocal(email, password, username) {
+    if (!email || !password || !username) return false;
+    if (username.length < 3) return false;
+    setSavedUsername(username);
+    localStorage.setItem('user_email', email);
+    localStorage.setItem('user_password', password); // For demo only, not secure!
+    return true;
+}
+function logInLocal(email, password) {
+    return localStorage.getItem('user_email') === email &&
+        localStorage.getItem('user_password') === password;
+}
+function logOutLocal() {
+    localStorage.removeItem(LS_KEYS.USERNAME);
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_password');
+}
+
+// --- TRANSLATION FUNCTION ---
 function setLanguage(lang) {
     if (!translations || !translations[lang]) return;
     currentLang = lang;
@@ -86,7 +111,6 @@ function setLanguage(lang) {
 }
 
 // --- HELPERS FOR LOCALSTORAGE DATA ---
-// Likes (posts)
 function _getLikesMap() {
     return JSON.parse(localStorage.getItem(LS_KEYS.LIKES) || '{}');
 }
@@ -99,7 +123,6 @@ function _getUserLikes() {
 function _saveUserLikes(obj) {
     localStorage.setItem(LS_KEYS.USER_LIKES, JSON.stringify(obj));
 }
-// Character likes
 function _getCharLikesMap() {
     return JSON.parse(localStorage.getItem(LS_KEYS.CHAR_LIKES) || '{}');
 }
@@ -112,14 +135,12 @@ function _getUserCharLikes() {
 function _saveUserCharLikes(obj) {
     localStorage.setItem(LS_KEYS.USER_CHAR_LIKES, JSON.stringify(obj));
 }
-// Comments
 function _getCommentsMap() {
     return JSON.parse(localStorage.getItem(LS_KEYS.COMMENTS) || '{}');
 }
 function _saveCommentsMap(map) {
     localStorage.setItem(LS_KEYS.COMMENTS, JSON.stringify(map));
 }
-// Username
 function getSavedUsername() {
     return localStorage.getItem(LS_KEYS.USERNAME) || '';
 }
@@ -128,8 +149,6 @@ function setSavedUsername(name) {
         localStorage.setItem(LS_KEYS.USERNAME, name.trim());
     }
 }
-
-// Utility
 function generateId(prefix = 'id') {
     return prefix + '_' + Math.random().toString(36).slice(2, 9);
 }
@@ -337,7 +356,6 @@ function renderCharacterForm(charId, formId) {
         const fullBasicInfo = { ...character.baseInfo, ...form.specificInfo };
         let basicInfoHTML = '<dl>';
         const infoFieldOrder = [ 'fullName', 'nickname', 'species', 'age', 'gender', 'pronouns', 'sexuality', 'status', 'height', 'weight', 'build', 'occupation', 'language', 'disorders', 'magic' ];
-
         infoFieldOrder.forEach(key => {
             if (fullBasicInfo[key]) {
                 const label = langDict[`info_${key}`] || key;
@@ -354,7 +372,6 @@ function renderCharacterForm(charId, formId) {
         const designNotes = (langDict[form.designNotesKey] || '').replace(/\n/g, '<br>');
         const quote = (langDict[form.quoteKey] || '');
         const tagsHTML = character.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-
         const downloadFilename = `${character.id}_${form.formId}_ref.png`;
 
         container.innerHTML = `
@@ -381,7 +398,6 @@ function renderCharacterForm(charId, formId) {
                 <button id="like-btn-${character.id}" class="like-btn" onclick="toggleCharacterLike('${character.id}')"></button>
             </div>
         `;
-
         updateCharacterLikeButton(character.id);
     } catch (error) {
         console.error(`Failed to render form ${formId} for character ${charId}:`, error);
@@ -389,69 +405,49 @@ function renderCharacterForm(charId, formId) {
         if (container) container.innerHTML = `<p>An error occurred. Check the console (F12) for details.</p>`;
     }
 }
-function renderCharacterForm(charId, formId) {
-    try {
-        const container = document.getElementById('character-profile-container');
-        const character = myCharacters.find(c => c.id === charId);
-        const form = character.forms.find(f => f.formId === formId);
 
-        if (!character || !form) { throw new Error("Character or form data is missing."); }
+// --- LIKES ---
+function toggleLike(postId) {
+    let userLikes = _getUserLikes();
+    let likesMap = _getLikesMap();
+    if (userLikes[postId]) {
+        delete userLikes[postId];
+        likesMap[postId] = Math.max((likesMap[postId] || 1) - 1, 0);
+    } else {
+        userLikes[postId] = true;
+        likesMap[postId] = (likesMap[postId] || 0) + 1;
+    }
+    _saveUserLikes(userLikes);
+    _saveLikesMap(likesMap);
+    updateLikeButton(postId);
+}
+function updateLikeButton(postId) {
+    const likeButton = document.getElementById(`like-btn-${postId}`);
+    if (!likeButton) return;
+    const likesMap = _getLikesMap();
+    const userLikes = _getUserLikes();
+    const likeCount = likesMap[postId] || 0;
+    const userHasLiked = !!userLikes[postId];
+    likeButton.innerHTML = `${translations[currentLang].like || 'Like'} (${likeCount})`;
+    likeButton.classList.toggle('liked', userHasLiked);
+}
 
-        document.querySelectorAll('#form-tabs-container .form-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.formId === formId);
-        });
-
-        const langDict = translations[currentLang];
-        const fullBasicInfo = { ...character.baseInfo, ...form.specificInfo };
-        let basicInfoHTML = '<dl>';
-        const infoFieldOrder = [ 'fullName', 'nickname', 'species', 'age', 'gender', 'pronouns', 'sexuality', 'status', 'height', 'weight', 'build', 'occupation', 'language', 'disorders', 'magic' ];
-        
-        infoFieldOrder.forEach(key => {
-            if (fullBasicInfo[key]) {
-                const label = langDict[`info_${key}`] || key;
-                const valueKey = fullBasicInfo[key];
-                const value = langDict[valueKey];
-                if (label && value) {
-                    basicInfoHTML += `<dt>${label}</dt><dd>${value}</dd>`;
-                }
-            }
-        });
-        basicInfoHTML += '</dl>';
-
-        const description = (langDict[form.descriptionKey] || '').replace(/\n/g, '<br>');
-        const designNotes = (langDict[form.designNotesKey] || '').replace(/\n/g, '<br>');
-        const quote = (langDict[form.quoteKey] || '');
-        const tagsHTML = character.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-        
-        // This will be the name of the downloaded file, e.g., "lane_lynn_ref.png"
-        const downloadFilename = `${character.id}_${form.formId}_ref.png`;
-
-        container.innerHTML = `
-            <div class="profile-main-content">
-                <div class="profile-ref-sheet">
-                    <a href="${form.refSheetUrl}" download="${downloadFilename}">
-                        <img src="${form.refSheetUrl}" alt="${langDict[form.nameKey]} Reference Sheet">
-                    </a>
-                </div>
-                <div class="profile-info-box">
-                    ${basicInfoHTML}
-                </div>
-            </div>
-            <div class="profile-description-area">
-                <p class="quote">${quote}</p>
-                <hr>
-                <h3 data-translate="profile_description">${langDict.profile_description}</h3>
-                <p>${description}</p>
-                <h3 data-translate="design_notes">${langDict.design_notes}</h3>
-                <p>${designNotes}</p>
-            </div>
-            <div class="profile-actions">
-                <div class="tags-container">${tagsHTML}</div>
-                <button id="like-btn-${character.id}" class="like-btn" onclick="toggleCharacterLike('${character.id}')"></button>
-            </div>
-        `;
-        
-       function updateCharacterLikeButton(charId) {
+// --- CHARACTER LIKES ---
+function toggleCharacterLike(charId) {
+    let userCharLikes = _getUserCharLikes();
+    let charLikesMap = _getCharLikesMap();
+    if (userCharLikes[charId]) {
+        delete userCharLikes[charId];
+        charLikesMap[charId] = Math.max((charLikesMap[charId] || 1) - 1, 0);
+    } else {
+        userCharLikes[charId] = true;
+        charLikesMap[charId] = (charLikesMap[charId] || 0) + 1;
+    }
+    _saveUserCharLikes(userCharLikes);
+    _saveCharLikesMap(charLikesMap);
+    updateCharacterLikeButton(charId);
+}
+function updateCharacterLikeButton(charId) {
     const likeButton = document.getElementById(`like-btn-${charId}`);
     if (!likeButton) return;
     const charLikesMap = _getCharLikesMap();
@@ -461,188 +457,60 @@ function renderCharacterForm(charId, formId) {
     likeButton.innerHTML = `${translations[currentLang].like || 'Like'} (${likeCount})`;
     likeButton.classList.toggle('liked', userHasLiked);
 }
-async function loadMyLikes() {
-    const currentUser = auth.currentUser;
-    if (!currentUser) return;
-    const postsContainer = document.getElementById('liked-posts-container');
-    const fanartContainer = document.getElementById('liked-fanart-container');
-    const charactersContainer = document.getElementById('liked-characters-container');
-    const langDict = translations[currentLang];
-    const loadingText = `<p>${langDict.loading_likes}</p>`;
-    if(postsContainer) postsContainer.innerHTML = loadingText;
-    if(fanartContainer) fanartContainer.innerHTML = loadingText;
-    if(charactersContainer) charactersContainer.innerHTML = loadingText;
-    const postLikesQuery = await db.collection('likes').where('userId', '==', currentUser.uid).get();
-    const likedPostIds = postLikesQuery.docs.map(doc => doc.data().postId);
-    const likedPosts = myPosts.filter(post => likedPostIds.includes(post.id));
-    const likedFanart = fanartPosts.filter(post => likedPostIds.includes(post.id));
-    renderLikedItems(likedPosts, postsContainer, 'post');
-    renderLikedItems(likedFanart, fanartContainer, 'post');
-    const charLikesQuery = await db.collection('character_likes').where('userId', '==', currentUser.uid).get();
-    const likedCharIds = charLikesQuery.docs.map(doc => doc.data().charId);
-    const likedCharacters = myCharacters.filter(char => likedCharIds.includes(char.id));
-    renderLikedItems(likedCharacters, charactersContainer, 'character');
-}
-function renderLikedItems(itemsArray, container, itemType) {
-    if (!container) return;
-    container.innerHTML = '';
-    if (itemsArray.length === 0) {
-        container.innerHTML = `<p>${translations[currentLang].no_liked_items}</p>`;
-        return;
-    }
-    itemsArray.forEach(item => {
-        const langDict = translations[currentLang];
-        const title = langDict[item.titleKey] || langDict[item.nameKey];
-        const imageUrl = item.iconUrl || (item.type === 'image' ? item.fileUrl : '');
-        const link = itemType === 'character' ? `character-profile.html?id=${item.id}` : `post.html?id=${item.id}`;
-        const card = document.createElement('a');
-        card.href = link;
-        card.className = 'liked-item-card';
-        card.innerHTML = `<img src="${imageUrl}" alt="${title}"><p>${title}</p>`;
-        container.appendChild(card);
-    });
-}
-function filterByTag(tag) {
-    window.location.href = `index.html?search=${encodeURIComponent(tag)}`;
-}
-async function toggleLike(postId) {
-    const currentUser = auth.currentUser;
-    if (!currentUser) { alert(translations[currentLang].alert_like); return; }
-    const likeRef = db.collection('likes').where('postId', '==', postId).where('userId', '==', currentUser.uid);
-    const likeQuery = await likeRef.get();
-    if (likeQuery.empty) {
-        await db.collection('likes').add({ postId: postId, userId: currentUser.uid });
-    } else {
-        likeQuery.forEach(doc => doc.ref.delete());
-    }
-    updateLikeButton(postId);
-}
-async function updateLikeButton(postId) {
-    const likeButton = document.getElementById(`like-btn-${postId}`);
-    if (!likeButton) return;
-    try {
-        const likesQuery = await db.collection('likes').where('postId', '==', postId).get();
-        const likeCount = likesQuery.size;
-        const currentUser = auth.currentUser;
-        let userHasLiked = false;
-        if (currentUser) {
-            const userLikeQuery = await db.collection('likes').where('postId', '==', postId).where('userId', '==', currentUser.uid).get();
-            userHasLiked = !userLikeQuery.empty;
-        }
-        likeButton.innerHTML = `${translations[currentLang].like} (${likeCount})`;
-        likeButton.classList.toggle('liked', userHasLiked);
-    } catch (error) {
-        console.error("Error updating like button for post " + postId + ":", error);
-        likeButton.innerHTML = `${translations[currentLang].like} (0)`;
-    }
-}
-async function toggleCharacterLike(charId) {
-    const currentUser = auth.currentUser;
-    if (!currentUser) { alert(translations[currentLang].alert_like); return; }
-    const likeRef = db.collection('character_likes').where('charId', '==', charId).where('userId', '==', currentUser.uid);
-    const likeQuery = await likeRef.get();
-    if (likeQuery.empty) {
-        await db.collection('character_likes').add({ charId: charId, userId: currentUser.uid });
-    } else {
-        likeQuery.forEach(doc => doc.ref.delete());
-    }
-    updateCharacterLikeButton(charId);
-}
-async function updateCharacterLikeButton(charId) {
-    const likeButton = document.getElementById(`like-btn-${charId}`);
-    if (!likeButton) return;
-    try {
-        const likesQuery = await db.collection('character_likes').where('charId', '==', charId).get();
-        const likeCount = likesQuery.size;
-        const currentUser = auth.currentUser;
-        let userHasLiked = false;
-        if (currentUser) {
-            const userLikeQuery = await db.collection('character_likes').where('charId', '==', charId).where('userId', '==', currentUser.uid).get();
-            userHasLiked = !userLikeQuery.empty;
-        }
-        likeButton.innerHTML = `${translations[currentLang].like} (${likeCount})`;
-        likeButton.classList.toggle('liked', userHasLiked);
-    } catch (error) {
-        console.error("Error updating char like button for " + charId + ":", error);
-        likeButton.innerHTML = `${translations[currentLang].like} (0)`;
-    }
-}
-async function sharePost(postId) {
-    let post = myPosts.find(p => p.id === postId) || fanartPosts.find(p => p.id === postId);
-    if (!post) return;
-    const shareData = { title: `KennyChris's Art`, text: `Check out this artwork: "${translations[currentLang][post.titleKey]}"`, url: window.location.href };
-    if (navigator.share) {
-        await navigator.share(shareData).catch(err => console.error('Share failed:', err));
-    } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert(translations[currentLang].alert_link_copied);
-    }
-}
-function copyRSSLink() {
-    const rssUrl = window.location.origin + '/feed.xml';
-    navigator.clipboard.writeText(rssUrl).then(() => {
-        alert(translations[currentLang].alert_rss_copied);
-    }).catch(err => {
-        console.error('Error al intentar copiar el enlace RSS: ', err);
-    });
-}
-async function loadComments(postId) {
+
+// --- COMMENTS ---
+function loadComments(postId) {
     const commentsContainer = document.getElementById(`comments-${postId}`);
     if (!commentsContainer) return;
-    commentsContainer.innerHTML = `<p>${translations[currentLang].loading_comments}</p>`;
-    try {
-        const commentsQuery = await db.collection('comments').where('postId', '==', postId).orderBy('timestamp', 'asc');
-        const querySnapshot = await commentsQuery.get();
-        if (querySnapshot.empty) {
-            commentsContainer.innerHTML = `<p>${translations[currentLang].no_comments}</p>`;
-        } else {
-            commentsContainer.innerHTML = '';
-            querySnapshot.forEach(doc => {
-                const comment = doc.data();
-                const commentElement = document.createElement('div');
-                commentElement.classList.add('comment');
-                const currentUser = auth.currentUser;
-                let deleteButton = '';
-                if (currentUser && currentUser.uid === adminUID) {
-                    deleteButton = `<button class="delete-btn" onclick="deleteComment('${doc.id}', '${postId}')">Delete</button>`;
-                }
-                const displayName = comment.userDisplayName || 'Anonymous';
-                commentElement.innerHTML = `<p><strong>${displayName}:</strong> ${comment.text}</p>${deleteButton}`;
-                commentsContainer.appendChild(commentElement);
-            });
-        }
-    } catch (error) {
-        console.error("Error loading comments:", error);
-        commentsContainer.innerHTML = `<p>${translations[currentLang].error_load_comments}</p>`;
+    const commentsMap = _getCommentsMap();
+    const comments = commentsMap[postId] || [];
+    if (comments.length === 0) {
+        commentsContainer.innerHTML = `<p>${translations[currentLang].no_comments}</p>`;
+        return;
     }
+    commentsContainer.innerHTML = '';
+    comments.forEach(comment => {
+        const commentElement = document.createElement('div');
+        commentElement.classList.add('comment');
+        let deleteButton = '';
+        const currentUser = getCurrentUser();
+        if (currentUser && comment.clientId === currentUser.clientId) {
+            deleteButton = `<button class="delete-btn" onclick="deleteComment('${comment.id}', '${postId}')">Delete</button>`;
+        }
+        const displayName = comment.name || 'Anonymous';
+        commentElement.innerHTML = `<p><strong>${displayName}:</strong> ${escapeHtml(comment.text)}</p>${deleteButton}`;
+        commentsContainer.appendChild(commentElement);
+    });
 }
 function addComment(postId) {
-    const currentUser = auth.currentUser;
+    const currentUser = getCurrentUser();
     if (!currentUser) { alert(translations[currentLang].alert_comment); return; }
     const commentInput = document.getElementById(`comment-input-${postId}`);
     const commentText = commentInput.value.trim();
     if (commentText === '') { alert(translations[currentLang].alert_comment_empty); return; }
-    const displayName = currentUserProfile.username || currentUser.email;
-    db.collection('comments').add({
+    const commentsMap = _getCommentsMap();
+    const newComment = {
+        id: generateId('comment'),
+        name: currentUser.username,
         text: commentText,
-        postId: postId,
-        userId: currentUser.uid,
-        userDisplayName: displayName,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-        commentInput.value = '';
-        loadComments(postId);
-    });
+        timestamp: Date.now(),
+        clientId: currentUser.clientId
+    };
+    commentsMap[postId] = commentsMap[postId] || [];
+    commentsMap[postId].push(newComment);
+    _saveCommentsMap(commentsMap);
+    commentInput.value = '';
+    loadComments(postId);
 }
 function deleteComment(commentId, postId) {
-    if (!confirm('Are you sure you want to delete this comment forever?')) return;
-    db.collection('comments').doc(commentId).delete().then(() => {
-        loadComments(postId);
-    });
+    const commentsMap = _getCommentsMap();
+    commentsMap[postId] = (commentsMap[postId] || []).filter(c => c.id !== commentId);
+    _saveCommentsMap(commentsMap);
+    loadComments(postId);
 }
-async function saveUsername() {
-    const currentUser = auth.currentUser;
-    if (!currentUser) return;
+
+// --- USERNAME ---
+function saveUsername() {
     const usernameInput = document.getElementById('username-input');
     if (!usernameInput) return;
     const newUsername = usernameInput.value.trim();
@@ -650,110 +518,22 @@ async function saveUsername() {
         alert(translations[currentLang].alert_username_length);
         return;
     }
-    try {
-        const usernameQuery = await db.collection('users').where('username', '==', newUsername).get();
-        let isTaken = false;
-        usernameQuery.forEach(doc => {
-            if (doc.id !== currentUser.uid) {
-                isTaken = true;
-            }
-        });
-        if (isTaken) {
-            alert(translations[currentLang].alert_username_taken);
-            return;
-        }
-        await db.collection('users').doc(currentUser.uid).set({ username: newUsername }, { merge: true });
-        alert(translations[currentLang].alert_username_saved);
-        const welcomeMessage = document.getElementById('welcome-message');
-        if (welcomeMessage) {
-            welcomeMessage.textContent = `Welcome, ${newUsername}`;
-        }
-    } catch (error) {
-        console.error("Error saving username: ", error);
-        alert(translations[currentLang].alert_username_error);
+    setSavedUsername(newUsername);
+    alert(translations[currentLang].alert_username_saved);
+    const welcomeMessage = document.getElementById('welcome-message');
+    if (welcomeMessage) {
+        welcomeMessage.textContent = `Welcome, ${newUsername}`;
     }
 }
-// --- USER AUTHENTICATION FUNCTIONS ---
-function handleAuthError(error) {
-    const errorMessageElement = document.getElementById('error-message');
-    if (!errorMessageElement) {
-        alert(error.message);
-        return;
-    }
-    if (error.code === 'auth/network-request-failed') {
-        errorMessageElement.textContent = translations[currentLang].adblock_warning;
-        errorMessageElement.classList.remove('hidden');
-    } else {
-        errorMessageElement.textContent = error.message;
-        errorMessageElement.classList.remove('hidden');
-    }
-}
-async function signUp() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const username = document.getElementById('username-signup').value.trim();
-    const langDict = translations[currentLang];
-    if (!email || !password || !username) {
-        alert("Please fill in email, username, and password to sign up.");
-        return;
-    }
-    if (username.length < 3) {
-        alert(langDict.alert_username_length);
-        return;
-    }
-    try {
-        const usernameQuery = await db.collection('users').where('username', '==', username).get();
-        if (!usernameQuery.empty) {
-            alert(langDict.alert_username_taken);
-            return;
-        }
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        const newUser = userCredential.user;
-        await db.collection('users').doc(newUser.uid).set({ username: username });
-        window.location.href = 'index.html';
-    } catch (error) {
-        handleAuthError(error);
-    }
-}
-function logIn() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    if (email && password) {
-        auth.signInWithEmailAndPassword(email, password)
-            .then(() => { window.location.href = 'index.html'; })
-            .catch(handleAuthError);
-    }
-}
-async function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-        const result = await auth.signInWithPopup(provider);
-        const isNewUser = result.additionalUserInfo.isNewUser;
-        if (isNewUser) {
-            window.location.href = 'profile.html?newuser=true';
-        } else {
-            window.location.href = 'index.html';
-        }
-    } catch (error) {
-        handleAuthError(error);
-    }
-}
-function logOut() {
-    auth.signOut().then(() => {
-        window.location.href = 'index.html';
-    });
-}
-// --- MAIN AUTH STATE CONTROLLER ---
-auth.onAuthStateChanged(async (user) => {
+
+// --- MAIN AUTH STATE CONTROLLER (Local Only) ---
+function updateUIOnAuth() {
+    const currentUser = getCurrentUser();
     const onIndexPage = document.getElementById('post-grid');
     const onLoginPage = document.querySelector('body #auth-container');
     const onProfilePage = document.getElementById('profile-page-container');
-
-    if (user) {
-        const userDoc = await db.collection('users').doc(user.uid).get();
-        currentUserProfile = userDoc.exists ? userDoc.data() : {};
-        const displayName = currentUserProfile.username || user.email;
-
+    if (currentUser) {
+        const displayName = currentUser.username;
         if (onLoginPage) {
             window.location.href = 'index.html';
             return;
@@ -767,13 +547,8 @@ auth.onAuthStateChanged(async (user) => {
             loginLinkContainer.classList.add('hidden');
         }
         if (onProfilePage) {
-            document.getElementById('profile-email-display').textContent = user.email;
-            document.getElementById('username-input').value = currentUserProfile.username || '';
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('newuser')) {
-                document.getElementById('new-user-welcome').classList.remove('hidden');
-            }
-            loadMyLikes();
+            document.getElementById('profile-email-display').textContent = localStorage.getItem('user_email') || '';
+            document.getElementById('username-input').value = currentUser.username || '';
         }
     } else {
         if (onProfilePage) {
@@ -786,7 +561,32 @@ auth.onAuthStateChanged(async (user) => {
             document.getElementById('login-link-container').classList.remove('hidden');
         }
     }
-});
+}
+
+// --- SHARE POST ---
+function sharePost(postId) {
+    let post = myPosts.find(p => p.id === postId) || fanartPosts.find(p => p.id === postId);
+    if (!post) return;
+    const shareData = { title: `KennyChris's Art`, text: `Check out this artwork: "${translations[currentLang][post.titleKey]}"`, url: window.location.href };
+    if (navigator.share) {
+        navigator.share(shareData).catch(err => console.error('Share failed:', err));
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert(translations[currentLang].alert_link_copied);
+    }
+}
+function copyRSSLink() {
+    const rssUrl = window.location.origin + '/feed.xml';
+    navigator.clipboard.writeText(rssUrl).then(() => {
+        alert(translations[currentLang].alert_rss_copied);
+    }).catch(err => {
+        console.error('Error al intentar copiar el enlace RSS: ', err);
+    });
+}
+function filterByTag(tag) {
+    window.location.href = `index.html?search=${encodeURIComponent(tag)}`;
+}
+
 // --- INITIALIZE THE WEBSITE ---
 document.addEventListener('DOMContentLoaded', () => {
     const langToggle = document.getElementById('lang-toggle');
@@ -826,6 +626,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (characterSearchInput) {
         characterSearchInput.addEventListener('input', () => {
             displayCharacterGallery(characterSearchInput.value);
+        });
+    }
+
+    // Local Auth: signup, login, logout
+    updateUIOnAuth();
+
+    const signupBtn = document.getElementById('signup-btn');
+    if (signupBtn) {
+        signupBtn.addEventListener('click', () => {
+            const email = document.getElementById('email-signup').value;
+            const password = document.getElementById('password-signup').value;
+            const username = document.getElementById('username-signup').value.trim();
+            if (signUpLocal(email, password, username)) {
+                window.location.href = 'index.html';
+            } else {
+                alert('Sign up failed. Make sure all fields are filled and username is at least 3 characters.');
+            }
+        });
+    }
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('password-login').value;
+            if (logInLocal(email, password)) {
+                window.location.href = 'index.html';
+            } else {
+                alert('Login failed. Check your email and password.');
+            }
+        });
+    }
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            logOutLocal();
+            window.location.href = 'login.html';
         });
     }
 });
