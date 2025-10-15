@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Kenny's Art Feed</title>
+    <link>https://kennychris.nekoweb.org/</link>
+    <description>KennyChris's Latest Posts</description>
+
+    <item>
+      <title>Render Practice</title>
+      <link>https://kennychris.nekoweb.org/post.html?id=post005</link>
+      <description><![CDATA[Today I'll show you a drawing of Axel in the middle of the city... Why so late, Axel?]]></description>
+      <pubDate>Wed, 03 Sep 2025 20:35:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/post.html?id=post005</guid>
+    </item>
+
+    <item>
+      <title>In The Night</title>
+      <link>https://kennychris.nekoweb.org/post.html?id=post004</link>
+      <description><![CDATA[Today I'll show you a drawing of Axel in the middle of the city... Why so late, Axel?]]></description>
+      <pubDate>Fri, 15 Aug 2025 21:35:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/post.html?id=post004</guid>
+    </item>
+
+    <item>
+      <title>New Character: Kenny</title>
+      <link>https://kennychris.nekoweb.org/character-profile?id=kenny</link>
+      <description><![CDATA[Check out my new character's profile now!]]></description>
+      <pubDate>Fri, 15 Aug 2025 17:23:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/character-profile?id=kenny</guid>
+    </item>
+
+    <item>
+      <title>Bi Animation Meme</title>
+      <link>https://kennychris.nekoweb.org/post.html?id=post003</link>
+      <description><![CDATA[An animation meme I did using only the vector feature on Alight Motion!]]></description>
+      <pubDate>Thu, 14 Aug 2025 18:15:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/post.html?id=post003</guid>
+    </item>
+
+    <item>
+      <title>Take Care Of This</title>
+      <link>https://kennychris.nekoweb.org/post.html?id=post002</link>
+      <description><![CDATA[Another Something Bad Will Happen Soon fanart, this time it includes N0S3NS3, my own SBWHS OC!]]></description>
+      <pubDate>Wed, 13 Aug 2025 20:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/post.html?id=post002</guid>
+    </item>
+
+    <item>
+      <title>The Gaggles</title>
+      <link>https://kennychris.nekoweb.org/post.html?id=post001</link>
+      <description><![CDATA[Here is some fanart I did of Dr. Gaggle from Something Bad Will Happen Soon on Roblox.]]></description>
+      <pubDate>Tue, 12 Aug 2025 21:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/post.html?id=post001</guid>
+    </item>
+
+  </channel>
+</rss>
