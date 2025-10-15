@@ -1,21 +1,4 @@
-// Paste your Firebase configuration here
-const firebaseConfig = {
-    apiKey: "AIzaSyCH98USlYsm5EN7x-5WZbLxMtJlDRnCdfU",
-    authDomain: "kennychris-594b2.firebaseapp.com",
-    projectId: "kennychris-594b2",
-    storageBucket: "kennychris-594b2.appspot.com",
-    messagingSenderId: "1526701784",
-    appId: "1:1526701784:web:1d6d6358536f09d35801ad"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
 // --- GLOBAL VARIABLES ---
-const adminUID = "scUch5Y2OrSjo7tRSPQCu2sIzet1";
-let currentUserProfile = {};
 let currentLang = 'en';
 
 // --- CONTENT DATA ---
@@ -52,9 +35,30 @@ const myCharacters = [
     }
 ];
 
-// --- TRANSLATION FUNCTION ---
+// --- LocalStorage keys & client id ---
+const LS_KEYS = {
+    LIKES: 'kaf_likes',           // { postId: count, ... }
+    USER_LIKES: 'kaf_user_likes', // { postId: true, ... } (which posts this browser liked)
+    CHAR_LIKES: 'kaf_char_likes', // { charId: count, ... }
+    USER_CHAR_LIKES: 'kaf_user_char_likes', // { charId: true, ... }
+    COMMENTS: 'kaf_comments',     // { postId: [ { id, name, text, timestamp, clientId } ] }
+    USERNAME: 'kaf_username',
+    CLIENT_ID: 'kaf_client_id'
+};
+
+function getClientId() {
+    let id = localStorage.getItem(LS_KEYS.CLIENT_ID);
+    if (!id) {
+        id = 'c_' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem(LS_KEYS.CLIENT_ID, id);
+    }
+    return id;
+}
+const CLIENT_ID = getClientId();
+
+// --- TRANSLATION FUNCTION (keeps your original behaviour) ---
 function setLanguage(lang) {
-    if (!translations[lang]) return;
+    if (!translations || !translations[lang]) return;
     currentLang = lang;
     localStorage.setItem('language', lang);
     document.querySelectorAll('[data-translate]').forEach(el => {
@@ -81,6 +85,63 @@ function setLanguage(lang) {
     }
 }
 
+// --- HELPERS FOR LOCALSTORAGE DATA ---
+// Likes (posts)
+function _getLikesMap() {
+    return JSON.parse(localStorage.getItem(LS_KEYS.LIKES) || '{}');
+}
+function _saveLikesMap(map) {
+    localStorage.setItem(LS_KEYS.LIKES, JSON.stringify(map));
+}
+function _getUserLikes() {
+    return JSON.parse(localStorage.getItem(LS_KEYS.USER_LIKES) || '{}');
+}
+function _saveUserLikes(obj) {
+    localStorage.setItem(LS_KEYS.USER_LIKES, JSON.stringify(obj));
+}
+// Character likes
+function _getCharLikesMap() {
+    return JSON.parse(localStorage.getItem(LS_KEYS.CHAR_LIKES) || '{}');
+}
+function _saveCharLikesMap(map) {
+    localStorage.setItem(LS_KEYS.CHAR_LIKES, JSON.stringify(map));
+}
+function _getUserCharLikes() {
+    return JSON.parse(localStorage.getItem(LS_KEYS.USER_CHAR_LIKES) || '{}');
+}
+function _saveUserCharLikes(obj) {
+    localStorage.setItem(LS_KEYS.USER_CHAR_LIKES, JSON.stringify(obj));
+}
+// Comments
+function _getCommentsMap() {
+    return JSON.parse(localStorage.getItem(LS_KEYS.COMMENTS) || '{}');
+}
+function _saveCommentsMap(map) {
+    localStorage.setItem(LS_KEYS.COMMENTS, JSON.stringify(map));
+}
+// Username
+function getSavedUsername() {
+    return localStorage.getItem(LS_KEYS.USERNAME) || '';
+}
+function setSavedUsername(name) {
+    if (typeof name === 'string') {
+        localStorage.setItem(LS_KEYS.USERNAME, name.trim());
+    }
+}
+
+// Utility
+function generateId(prefix = 'id') {
+    return prefix + '_' + Math.random().toString(36).slice(2, 9);
+}
+function escapeHtml(str = '') {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+}
+
 // --- RENDER & INTERACTION FUNCTIONS ---
 function displayPosts(searchQuery = '') {
     displayContent(searchQuery, myPosts, 'post-grid');
@@ -90,7 +151,7 @@ function displayContent(searchQuery, contentArray, gridId) {
     const postGrid = document.getElementById(gridId);
     if (!postGrid) return;
     const langDict = translations[currentLang];
-    if (contentArray.length === 0) {
+    if (!contentArray || contentArray.length === 0) {
         postGrid.innerHTML = `<p style="grid-column: 1 / -1;">${langDict.no_posts_yet}</p>`;
         return;
     }
@@ -113,19 +174,18 @@ function displayContent(searchQuery, contentArray, gridId) {
         postElement.classList.add('post-item');
         const postTitle = langDict[post.titleKey];
         const postDesc = langDict[post.descKey];
-        
+
         let mediaElement;
         if (post.type === 'image') {
-            mediaElement = `<img src="${post.fileUrl}" alt="${postTitle}">`;
+            mediaElement = `<img src="${post.fileUrl}" alt="${escapeHtml(postTitle)}">`;
         } else {
-            // Reverted to a simple, single-source video tag
-            mediaElement = `<video controls autoplay muted loop playsinline src="${post.fileUrl}"></video>`;
+            mediaElement = `<video controls muted loop playsinline src="${post.fileUrl}"></video>`;
         }
 
         const tagsHTML = post.tags.map(tag => `<span class="tag" onclick="filterByTag('${tag}')">${tag}</span>`).join('');
         postElement.innerHTML = `
             ${mediaElement}
-            <div class="post-info"><button class="post-title-button" onclick="goToPost('${post.id}')"><h3>${postTitle}</h3></button><p>${postDesc}</p></div>
+            <div class="post-info"><button class="post-title-button" onclick="goToPost('${post.id}')"><h3>${escapeHtml(postTitle)}</h3></button><p>${escapeHtml(postDesc)}</p></div>
             <div class="tags-container">${tagsHTML}</div>
             <div class="post-actions">
                 <button id="like-btn-${post.id}" class="like-btn" onclick="toggleLike('${post.id}')"></button>
@@ -135,7 +195,7 @@ function displayContent(searchQuery, contentArray, gridId) {
                 <h4 data-translate="comments">${langDict.comments}</h4>
                 <div class="comments-container" id="comments-${post.id}"></div>
                 <div class="add-comment-form">
-                    <textarea id="comment-input-${post.id}"></textarea>
+                    <textarea id="comment-input-${post.id}" placeholder="${langDict.comment_placeholder || ''}"></textarea>
                     <button onclick="addComment('${post.id}')">${langDict.submit}</button>
                 </div>
             </div>
@@ -163,18 +223,18 @@ function loadPostDetailPage() {
 
     const postElement = document.createElement('div');
     postElement.classList.add('post-item');
-    
+
     let mediaElement;
     if (post.type === 'image') {
-        mediaElement = `<img src="${post.fileUrl}" alt="${postTitle}">`;
+        mediaElement = `<img src="${post.fileUrl}" alt="${escapeHtml(postTitle)}">`;
     } else {
-        mediaElement = `<video controls autoplay muted loop playsinline src="${post.fileUrl}"></video>`;
+        mediaElement = `<video controls muted loop playsinline src="${post.fileUrl}"></video>`;
     }
 
     const tagsHTML = post.tags.map(tag => `<span class="tag" onclick="filterByTag('${tag}')">${tag}</span>`).join('');
     postElement.innerHTML = `
         ${mediaElement}
-        <div class="post-info"><h3>${postTitle}</h3><p>${postDesc}</p></div>
+        <div class="post-info"><h3>${escapeHtml(postTitle)}</h3><p>${escapeHtml(postDesc)}</p></div>
         <div class="tags-container">${tagsHTML}</div>
         <div class="post-actions">
             <button id="like-btn-${post.id}" class="like-btn" onclick="toggleLike('${post.id}')"></button>
@@ -184,7 +244,7 @@ function loadPostDetailPage() {
             <h4 data-translate="comments">${langDict.comments}</h4>
             <div class="comments-container" id="comments-${post.id}"></div>
             <div class="add-comment-form">
-                <textarea id="comment-input-${post.id}"></textarea>
+                <textarea id="comment-input-${post.id}" placeholder="${langDict.comment_placeholder || ''}"></textarea>
                 <button onclick="addComment('${post.id}')">${langDict.submit}</button>
             </div>
         </div>
@@ -214,11 +274,9 @@ function displayCharacterGallery(searchQuery = '') {
         card.href = `character-profile.html?id=${char.id}`;
         card.className = 'character-card';
         card.innerHTML = `
-            <img src="${char.iconUrl}" alt="${charName}">
-            <h4>${charName}</h4>
-            <div class="tags-container">
-                ${tagsHTML}
-            </div>
+            <img src="${char.iconUrl}" alt="${escapeHtml(charName)}">
+            <h4>${escapeHtml(charName)}</h4>
+            <div class="tags-container">${tagsHTML}</div>
         `;
         grid.appendChild(card);
     });
@@ -259,6 +317,74 @@ function loadCharacterProfile() {
         renderCharacterForm(charId, character.forms[0].formId);
     } catch (error) {
         console.error("Failed to load character profile:", error);
+        const container = document.getElementById('character-profile-container');
+        if (container) container.innerHTML = `<p>An error occurred. Check the console (F12) for details.</p>`;
+    }
+}
+function renderCharacterForm(charId, formId) {
+    try {
+        const container = document.getElementById('character-profile-container');
+        const character = myCharacters.find(c => c.id === charId);
+        const form = character.forms.find(f => f.formId === formId);
+
+        if (!character || !form) { throw new Error("Character or form data is missing."); }
+
+        document.querySelectorAll('#form-tabs-container .form-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.formId === formId);
+        });
+
+        const langDict = translations[currentLang];
+        const fullBasicInfo = { ...character.baseInfo, ...form.specificInfo };
+        let basicInfoHTML = '<dl>';
+        const infoFieldOrder = [ 'fullName', 'nickname', 'species', 'age', 'gender', 'pronouns', 'sexuality', 'status', 'height', 'weight', 'build', 'occupation', 'language', 'disorders', 'magic' ];
+
+        infoFieldOrder.forEach(key => {
+            if (fullBasicInfo[key]) {
+                const label = langDict[`info_${key}`] || key;
+                const valueKey = fullBasicInfo[key];
+                const value = langDict[valueKey];
+                if (label && value) {
+                    basicInfoHTML += `<dt>${label}</dt><dd>${value}</dd>`;
+                }
+            }
+        });
+        basicInfoHTML += '</dl>';
+
+        const description = (langDict[form.descriptionKey] || '').replace(/\n/g, '<br>');
+        const designNotes = (langDict[form.designNotesKey] || '').replace(/\n/g, '<br>');
+        const quote = (langDict[form.quoteKey] || '');
+        const tagsHTML = character.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+
+        const downloadFilename = `${character.id}_${form.formId}_ref.png`;
+
+        container.innerHTML = `
+            <div class="profile-main-content">
+                <div class="profile-ref-sheet">
+                    <a href="${form.refSheetUrl}" download="${downloadFilename}">
+                        <img src="${form.refSheetUrl}" alt="${escapeHtml(langDict[form.nameKey])} Reference Sheet">
+                    </a>
+                </div>
+                <div class="profile-info-box">
+                    ${basicInfoHTML}
+                </div>
+            </div>
+            <div class="profile-description-area">
+                <p class="quote">${escapeHtml(quote)}</p>
+                <hr>
+                <h3 data-translate="profile_description">${langDict.profile_description}</h3>
+                <p>${description}</p>
+                <h3 data-translate="design_notes">${langDict.design_notes}</h3>
+                <p>${designNotes}</p>
+            </div>
+            <div class="profile-actions">
+                <div class="tags-container">${tagsHTML}</div>
+                <button id="like-btn-${character.id}" class="like-btn" onclick="toggleCharacterLike('${character.id}')"></button>
+            </div>
+        `;
+
+        updateCharacterLikeButton(character.id);
+    } catch (error) {
+        console.error(`Failed to render form ${formId} for character ${charId}:`, error);
         const container = document.getElementById('character-profile-container');
         if (container) container.innerHTML = `<p>An error occurred. Check the console (F12) for details.</p>`;
     }
@@ -325,12 +451,15 @@ function renderCharacterForm(charId, formId) {
             </div>
         `;
         
-        updateCharacterLikeButton(character.id);
-    } catch (error) {
-        console.error(`Failed to render form ${formId} for character ${charId}:`, error);
-        const container = document.getElementById('character-profile-container');
-        if (container) container.innerHTML = `<p>An error occurred. Check the console (F12) for details.</p>`;
-    }
+       function updateCharacterLikeButton(charId) {
+    const likeButton = document.getElementById(`like-btn-${charId}`);
+    if (!likeButton) return;
+    const charLikesMap = _getCharLikesMap();
+    const userCharLikes = _getUserCharLikes();
+    const likeCount = charLikesMap[charId] || 0;
+    const userHasLiked = !!userCharLikes[charId];
+    likeButton.innerHTML = `${translations[currentLang].like || 'Like'} (${likeCount})`;
+    likeButton.classList.toggle('liked', userHasLiked);
 }
 async function loadMyLikes() {
     const currentUser = auth.currentUser;
