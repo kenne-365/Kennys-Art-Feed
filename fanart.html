@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanart Submission - Kenny's Art Feed</title>
+
+    <meta property="og:title" content="Kenny's Art Feed!">
+    <meta property="og:description" content="Kenny's personal website for art, characters, and animations.">
+    <meta property="og:image" content="https://kennychris.nekoweb.org/embed_thumbnail.png">
+    <meta property="og:url" content="https://kennychris.nekoweb.org">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css?v=31">
+    <link rel="alternate" type="application/rss+xml" title="Kenny's Art Feed" href="feed.xml">
+</head>
+<body>
+
+    <header>
+        <h1 data-translate="fanart_submission">Fanart Submission</h1>
+        <nav>
+            <a href="index.html" class="nav-link" data-translate="nav_home">← Back to Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 data-translate="send_fanart_title">Send Your Fanart!</h2>
+        <p data-translate="send_fanart_desc">I'd love to see your creations! Fill out the form below to send your fanart directly to me. I'll post my favorites on the site and credit you using the social media info you provide.</p>
+
+        <form action="https://formsubmit.co/kennychris.neocities.org@gmail.com" method="POST" enctype="multipart/form-data">
+            
+            <input type="hidden" name="_subject" value="New Fanart Submission!">
+            <input type="hidden" name="_next" value="https://kennychris.neocities.org/thanks.html">
+            <input type="hidden" name="_captcha" value="false">
+
+            <div class="form-group">
+                <label for="social-platform" data-translate="social_platform">Social Media Platform:</label>
+                <select id="social-platform" name="Social_Platform" required>
+                    <option value="Instagram">Instagram</option>
+                    <option value="X (Twitter)">X (Twitter)</option>
+                    <option value="Tumblr">Tumblr</option>
+                    <option value="DeviantArt">DeviantArt</option>
+                    <option value="Bluesky">Bluesky</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="username" data-translate="your_username">Your Username:</label>
+                <input type="text" id="username" name="Username" placeholder="@your-username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fanart-file" data-translate="your_fanart_image">Your Fanart Image:</label>
+                <input type="file" id="fanart-file" name="attachment" accept="image/png, image/jpeg, image/gif" required>
+                <small data-translate="max_file_size">Max file size: 5MB</small>
+            </div>
+
+            <button type="submit" class="submit-btn" data-translate="send_fanart_button">Send Fanart</button>
+        </form>
+    </main>
+
+    <footer>
+        <p data-translate="copyright">&copy; 2025 KennyChris. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database-compat.js"></script>
+    
+    <script src="translations.js"></script> 
+    <script src="app.js"></script>
+</body>
+</html>
