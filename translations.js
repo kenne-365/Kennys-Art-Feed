@@ -21,25 +21,7 @@ const translations = {
     like: "Like",
     share: "Share",
     submit: "Submit",
-    log_out: "Log Out",
-    login_signup: "Login / Sign Up",
     copyright: "© 2025 KennyChris. All rights reserved.",
-
-    // --- Login Page ---
-    account_access: "Account Access",
-    login_or_signup: "Log In or Sign Up",
-    login: "Log In",
-    signup: "Sign Up",
-    signin_google: "Sign in with Google",
-
-    // --- Profile Page ---
-    manage_profile: "Manage Profile",
-    your_details: "Your Details",
-    email: "Email",
-    username: "Username",
-    username_desc: "Your public name for comments. Must be at least 3 characters.",
-    save_username: "Save Username",
-    welcome_new_user: "Welcome! Please set your username to continue.",
     
     // --- RSS Page ---
     subscribe_rss: "Subscribe to the RSS",
