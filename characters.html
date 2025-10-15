@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Kenny's Art Feed</title>
+
+    <meta property="og:title" content="Kenny's Art Feed!">
+    <meta property="og:description" content="Kenny's personal website for art, characters, and animations.">
+    <meta property="og:image" content="https://kennychris.nekoweb.org/embed_thumbnail.png">
+    <meta property="og:url" content="https://kennychris.nekoweb.org">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css?v=30">
+    <link rel="alternate" type="application/rss+xml" title="Kenny's Art Feed" href="feed.xml">
+</head>
+<body>
+    <header>
+        <h1 data-translate="characters_title">Characters</h1>
+        <nav>
+            <a href="index.html" class="nav-link" data-translate="nav_home">← Back to Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <input type="search" id="character-search-input" class="search-input" placeholder="Search characters by name or tag...">
+        </div>
+
+        <div id="character-gallery-grid"></div>
+    </main>
+
+    <footer>
+        <p data-translate="copyright">&copy; 2025 KennyChris. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database-compat.js"></script>
+    
+    <script src="translations.js"></script> 
+    <script src="app.js"></script>
+</body>
+</html>
