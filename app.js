@@ -27,10 +27,10 @@ const myCharacters = [
         baseInfo: { sexuality: "char_lane_sexuality", status: "char_lane_status", build: "char_lane_build", occupation: "char_lane_occupation", language: "char_lane_language", disorders: "char_lane_disorders" },
         forms: [
             { formId: "main", nameKey: "char_name_lane", refSheetUrl: "characters/lane_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lane_designNotes", specificInfo: { fullName: "char_lane_fullName", nickname: "char_lane_nickname", species: "char_lane_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lane_pronouns", height: "char_lane_height" } },
-            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "characters/lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname" } },
-            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "characters/lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname" } },
-            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" } },
-            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" } }
+            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "characters/lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname", species: "char_lynn_species"  }},
+            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "characters/lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname" , species: "char_lex_species" }},
+            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" , species: "char_lee_species" }},
+            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" , species: "char_loren_species" }}
         ]
     },
     {
