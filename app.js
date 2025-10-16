@@ -32,7 +32,17 @@ const myCharacters = [
             { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" } },
             { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" } }
         ]
-    }
+    },
+    {
+        id: "fido", nameKey: "char_name_fido", iconUrl: "characters/icons/fido_icon.png",
+        tags: ["IDog", "Furry", "OC"],
+        baseInfo: { sexuality: "char_fido_sexuality", status: "char_fido_status", occupation: "char_fido_occupation", language: "char_fido_language", disorders: "char_fido_disorders" },
+        forms: [{
+            formId: "main", nameKey: "char_name_fido", refSheetUrl: "characters/fido_ref.png",
+            quoteKey: "char_fido_quote", descriptionKey: "char_fido_description", designNotesKey: "char_fido_designNotes",
+            specificInfo: { fullName: "char_fido_fullName", species: "char_fido_species", age: "char_fido_age", gender: "char_fido_gender", pronouns: "char_fido_pronouns", height: "char_fido_height" }
+        }]
+    },
 ];
 
 // --- LocalStorage keys & client id ---
