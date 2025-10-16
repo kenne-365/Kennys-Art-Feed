@@ -115,7 +115,26 @@ const translations = {
     char_kenny_description: "Kenny is really insecure and anxious, but she's trying her best to socialize and stop overthinking everything, even if it comes out akward and not like she wanted.\nHe's really kind and sensitive, and loves drawing and creating stories for the people and him to enjoy!\nThey're kind of perfectionist, and want things done the correct way.\nIt's patience is also low, it won't stop doing what it's doing until it's completely done (Because it can easily get distracted by something else).\nKenny loves listening to music, specially if the song it's catchy or has a story/meaning behind.\nShe likes colorful clothing that can catch everyone's attention, like Decora Kei and Scene kid stuff.\nHe loves when other people draw for him!",
     char_kenny_designNotes: "- Please draw them WITH CLOTHES, you can design them all the clothes you want!\n- Make sure her hairstyle remains THE SAME, unless you want to make her a new hairstyle, then go ahead!\n- Their eyes are usually COVERED IN HAIR.\n- ALWAYS draw him with an AVERAGE body build.\n- Her tail has fur at the end.",
     
-    // Lane's Specific Info (MOVED TO THE CORRECT PLACE)
+    // Fido's Specific Info
+    char_name_fido: "Fido",
+    char_fido_fullName: "F1D0",
+    char_fido_species: "Anthro Idog",
+    char_fido_age: "Ageless",
+    char_fido_gender: "Male",
+    char_fido_pronouns: "He/They",
+    char_fido_sexuality: "Asexual Biromantic",
+    char_fido_status: "Single",
+    char_fido_height: "5' 5\"",
+    char_fido_weight: "127 lb",
+    char_fido_build: "Average",
+    char_fido_occupation: "DJ",
+    char_fido_language: "American English",
+    char_fido_disorders: "ADHD",
+    char_fido_quote: "\"I just want to make the world a better place!... And a better dance floor!\"",
+    char_fido_description: "Fido is really famous on TV for his job as an independent DJ and his carefree personality! \nHe's confident, kind, sweet and loyal to his friends, especially his crush Miinx.\nHe may be clumsy sometimes, and can be really honest too.\nHe likes dino nuggets, pizza (only with mozzarella) and orange juice! But dislikes cheddar cheese.\nHe's also a picky eater and hates soggy textures on food.\nHe's really good at rhythm games.\nHe loves dancing and is very good at it.\nHe hates being quiet or doing boring stuff, it drains him.\nHe can act generous by impulse and without thinking about it first.\nHe's too sensitive to criticism.\nHe gets easily distracted by lights, noise or even tunes.\ngear malfunctioning or sound issues are definitely his nightmare.\nHe can’t do anything without background music playing on a radio or his headphones.",
+    char_fido_designNotes: "- Please draw him WITH CLOTHES, you can design him all the clothes you want!\n- Make sure his hairstyle remains THE SAME, unless you want to make him a new hairstyle, then go ahead!\n- He has @ sings on his eyes that can change to other sings depending on his emotions.\n- ALWAYS draw him with an AVERAGE body build.\n- He has NO INNER MOUTH.\n- His marks are NOT OPTIONAL. \n- His articulations are NOT OPTIONAL.",
+
+    // Lane's Specific Info
     char_name_lane: "Lane",
     char_lane_fullName: "Lane Austen",
     char_lane_species: "Fennec Fox",
@@ -304,6 +323,25 @@ const translations = {
     char_kenny_description: "Kenny es muy insegure y ansiose, pero está haciendo su mejor esfuerzo para socializar y dejar de sobrepensar todo, incluso si todo resulta incómodo y no como quería.\nEs muy amable y sensible, ¡y le encanta dibujar y crear historias para que él y la gente disfruten!\nEs un poco perfeccionista y quiere que las cosas se hagan de la manera correcta.\nSu paciencia es baja, tampoco dejará de hacer lo que está haciendo hasta que esté completamente terminado (porque puede distraerse fácilmente con otra cosa).\nA Kenny le encanta escuchar música, especialmente si la canción es pegadiza o tiene una historia/significado detrás.\nLe gusta la ropa colorida que puede llamar la atención de todos, como cosas Decora Kei y Scene.\n¡Le encanta cuando otras personas dibujan para él!",
     char_kenny_designNotes: "- Por favor, dibújale CON ROPA, ¡puedes diseñarle toda la ropa que quieras!\n- Asegúrate de que su peinado siga siendo EL MISMO, a menos que quieras hacerle un peinado nuevo, ¡entonces adelante!\n- Sus ojos suelen estar CUBIERTOS POR EL PELO.\n- SIEMPRE dibújale con una complexión PROMEDIO.\n- Su cola tiene pelaje al final.",
     
+    // Información Específica de Fido
+    char_name_fido: "Fido",
+    char_fido_fullName: "F1D0",
+    char_fido_species: "Idog antropomírfico",
+    char_fido_age: "Sin edad",
+    char_fido_gender: "Masculino",
+    char_fido_pronouns: "ÉL/Elle",
+    char_fido_sexuality: "Asexual Biromántico",
+    char_fido_status: "Soltero",
+    char_fido_height: "165 cm",
+    char_fido_weight: "57 kg",
+    char_fido_build: "Promedio",
+    char_fido_occupation: "DJ",
+    char_fido_language: "Inglés Americano",
+    char_fido_disorders: "ADHD",
+    char_fido_quote: "\"¡Solo quiero hacer del mundo un lugar mejor!... ¡Y una mejor pista de baile!\"",
+    char_fido_description: "¡Fido es realmente famoso en la televisión por su trabajo como DJ independiente y su personalidad despreocupada!\n Es seguro de sí mismo, amable, dulce y leal con sus amigos, especialmente con su crush Miinx. \nPuede ser torpe a veces y también puede ser muy honesto. \nLe gustan los nuggets de dinosaurio, la pizza (solo con mozzarella) y el jugo de naranja, ¡pero no le gusta el queso cheddar! \nTambién es un comensal exigente y odia las texturas blandas en la comida. \nEs muy bueno en los juegos de ritmo. \nLe encanta bailar y es muy bueno en ello.\n Odia estar en silencio o hacer cosas aburridas, eso lo agota.\nPuede actuar de manera generosa por impulso y sin pensar primero.\nEs demasiado sensible a las críticas. \nSe distrae fácilmente con luces, ruidos o incluso con melodías. \nLas fallas en el equipo o problemas de sonido definitivamente son su pesadilla. \nNo puede hacer nada sin música de fondo que suene en la radio o en sus auriculares.",
+    char_fido_designNotes: "- Por favor, dibújalo CON ROPA, ¡puedes diseñarle toda la ropa que quieras! \n- Asegúrate de que su peinado permanezca IGUAL, ¡a menos que quieras darle un peinado nuevo, entonces adelante! \n- Tiene @s en sus ojos que pueden cambiar a otros signos dependiendo de sus emociones. \n- SIEMPRE dibújalo con un cuerpo de complexión PROMEDIO. \n- NO tiene BOCA INTERNA. \n- Sus marcas NO SON OPCIONALES. \n- Sus articulaciones NO SON OPCIONALES.",
+
     // Información Específica de Lane
     char_name_lane: "Lane",
     char_lane_fullName: "Lane Austen",
