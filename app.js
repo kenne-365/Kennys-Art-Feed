@@ -3,75 +3,56 @@ let currentLang = 'en';
 
 // --- CONTENT DATA ---
 const myPosts = [
-    { id: 'post005', type: 'image', titleKey: 'post_title_005', descKey: 'post_desc_005', fileUrl: 'images/Render.png', tags: ['Gift', 'Art', 'Clip Studio Paint', 'Digital'] },
-    { id: 'post004', type: 'image', titleKey: 'post_title_004', descKey: 'post_desc_004', fileUrl: 'images/InTheNight.png', tags: ['OC', 'Art', 'Ibis Paint X', 'Digital'] },
-    { id: 'post003', type: 'video', titleKey: 'post_title_003', descKey: 'post_desc_003', fileUrl: 'videos/BiMeme.mp4', tags: ['SBWHS', 'Fan Animation', 'Alight Motion', 'Digital', 'Animation Meme'] },
-    { id: 'post002', type: 'image', titleKey: 'post_title_002', descKey: 'post_desc_002', fileUrl: 'images/N0S3NS3&Chase.png', tags: ['SBWHS', 'Fan Art', 'Ibis Paint X', 'Digital', 'Fan OCs'] },
-    { id: 'post001', type: 'image', titleKey: 'post_title_001', descKey: 'post_desc_001', fileUrl: 'images/DrGaggleFanart.png', tags: ['SBWHS', 'Fan Art', 'Ibis Paint X', 'Digital'] }
+    { id: 'post005', type: 'image', titleKey: 'post_title_005', descKey: 'post_desc_005', fileUrl: 'Render.png', tags: ['Gift', 'Art', 'Clip Studio Paint', 'Digital'] },
+    { id: 'post004', type: 'image', titleKey: 'post_title_004', descKey: 'post_desc_004', fileUrl: 'InTheNight.png', tags: ['OC', 'Art', 'Ibis Paint X', 'Digital'] },
+    { id: 'post003', type: 'video', titleKey: 'post_title_003', descKey: 'post_desc_003', fileUrl: 'BiMeme.mp4', tags: ['SBWHS', 'Fan Animation', 'Alight Motion', 'Digital', 'Animation Meme'] },
+    { id: 'post002', type: 'image', titleKey: 'post_title_002', descKey: 'post_desc_002', fileUrl: 'N0S3NS3&Chase.png', tags: ['SBWHS', 'Fan Art', 'Ibis Paint X', 'Digital', 'Fan OCs'] },
+    { id: 'post001', type: 'image', titleKey: 'post_title_001', descKey: 'post_desc_001', fileUrl: 'DrGaggleFanart.png', tags: ['SBWHS', 'Fan Art', 'Ibis Paint X', 'Digital'] }
 ];
-const fanartPosts = [];
 const myCharacters = [
     {
-        id: "kenny", nameKey: "char_name_kenny", iconUrl: "characters/icons/kenny_icon.png",
+        id: "kenny", nameKey: "char_name_kenny", iconUrl: "kenny_icon.png",
         tags: ["Alien", "Sona"],
         baseInfo: { sexuality: "char_kenny_sexuality", status: "char_kenny_status", occupation: "char_kenny_occupation", language: "char_kenny_language", disorders: "char_kenny_disorders" },
         forms: [{
-            formId: "main", nameKey: "char_name_kenny", refSheetUrl: "characters/kenny_ref.png",
+            formId: "main", nameKey: "char_name_kenny", refSheetUrl: "kenny_ref.png",
             quoteKey: "char_kenny_quote", descriptionKey: "char_kenny_description", designNotesKey: "char_kenny_designNotes",
             specificInfo: { fullName: "char_kenny_fullName", species: "char_kenny_species", age: "char_kenny_age", gender: "char_kenny_gender", pronouns: "char_kenny_pronouns", height: "char_kenny_height" }
         }]
     },
     {
-        id: "lane", nameKey: "char_name_lane", iconUrl: "characters/icons/lane_icon.gif",
+        id: "lane", nameKey: "char_name_lane", iconUrl: "lane_icon.gif",
         tags: ["Shapeshifter", "Furry", "Fursona"],
         baseInfo: { sexuality: "char_lane_sexuality", status: "char_lane_status", build: "char_lane_build", occupation: "char_lane_occupation", language: "char_lane_language", disorders: "char_lane_disorders" },
         forms: [
-            { formId: "main", nameKey: "char_name_lane", refSheetUrl: "characters/lane_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lane_designNotes", specificInfo: { fullName: "char_lane_fullName", nickname: "char_lane_nickname", species: "char_lane_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lane_pronouns", height: "char_lane_height" } },
-            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "characters/lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname", species: "char_lynn_species"  }},
-            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "characters/lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname" , species: "char_lex_species" }},
-            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "characters/lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" , species: "char_lee_species" }},
-            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "characters/loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" , species: "char_loren_species" }}
+            { formId: "main", nameKey: "char_name_lane", refSheetUrl: "lane_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lane_designNotes", specificInfo: { fullName: "char_lane_fullName", nickname: "char_lane_nickname", species: "char_lane_species", age: "char_lane_age", gender: "char_lane_gender", pronouns: "char_lane_pronouns", height: "char_lane_height" } },
+            { formId: "lynn", nameKey: "char_lynn_nickname", refSheetUrl: "lynn_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lynn_designNotes", specificInfo: { nickname: "char_lynn_nickname", species: "char_lynn_species"  }},
+            { formId: "lex", nameKey: "char_lex_nickname", refSheetUrl: "lex_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lex_designNotes", specificInfo: { nickname: "char_lex_nickname" , species: "char_lex_species" }},
+            { formId: "lee", nameKey: "char_lee_nickname", refSheetUrl: "lee_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_lee_designNotes", specificInfo: { nickname: "char_lee_nickname" , species: "char_lee_species" }},
+            { formId: "loren", nameKey: "char_loren_nickname", refSheetUrl: "loren_ref.png", quoteKey: "char_lane_quote", descriptionKey: "char_lane_description", designNotesKey: "char_loren_designNotes", specificInfo: { nickname: "char_loren_nickname" , species: "char_loren_species" }}
         ]
     },
     {
-        id: "fido", nameKey: "char_name_fido", iconUrl: "characters/icons/fido_icon.png",
+        id: "fido", nameKey: "char_name_fido", iconUrl: "fido_icon.png",
         tags: ["IDog", "Furry", "OC"],
         baseInfo: { sexuality: "char_fido_sexuality", status: "char_fido_status", occupation: "char_fido_occupation", language: "char_fido_language", disorders: "char_fido_disorders" },
         forms: [{
-            formId: "main", nameKey: "char_name_fido", refSheetUrl: "characters/fido_ref.png",
+            formId: "main", nameKey: "char_name_fido", refSheetUrl: "fido_ref.png",
             quoteKey: "char_fido_quote", descriptionKey: "char_fido_description", designNotesKey: "char_fido_designNotes",
             specificInfo: { fullName: "char_fido_fullName", species: "char_fido_species", age: "char_fido_age", gender: "char_fido_gender", pronouns: "char_fido_pronouns", height: "char_fido_height" }
         }]
     },
+    {
+        id: "miinx", nameKey: "char_name_miinx", iconUrl: "miinx_icon.png",
+        tags: ["Alien", "OC"],
+        baseInfo: { sexuality: "char_miinx_sexuality", status: "char_miinx_status", occupation: "char_miinx_occupation", language: "char_miinx_language"},
+        forms: [{
+            formId: "main", nameKey: "char_name_miinx", refSheetUrl: "miinx_ref.png",
+            quoteKey: "char_miinx_quote", descriptionKey: "char_miinx_description", designNotesKey: "char_miinx_designNotes",
+            specificInfo: { fullName: "char_miinx_fullName", species: "char_miinx_species", age: "char_miinx_age", gender: "char_miinx_gender", pronouns: "char_miinx_pronouns", height: "char_miinx_height" }
+        }]
+    },
 ];
-
-// --- LocalStorage keys & client id ---
-const LS_KEYS = {
-    LIKES: 'kaf_likes',
-    USER_LIKES: 'kaf_user_likes',
-    CHAR_LIKES: 'kaf_char_likes',
-    USER_CHAR_LIKES: 'kaf_user_char_likes',
-    COMMENTS: 'kaf_comments',
-    USERNAME: 'kaf_username',
-    CLIENT_ID: 'kaf_client_id'
-};
-
-function getClientId() {
-    let id = localStorage.getItem(LS_KEYS.CLIENT_ID);
-    if (!id) {
-        id = 'c_' + Math.random().toString(36).slice(2, 10);
-        localStorage.setItem(LS_KEYS.CLIENT_ID, id);
-    }
-    return id;
-}
-function getUsername() {
-    return localStorage.getItem(LS_KEYS.USERNAME) || 'Anonymous';
-}
-function setUsername(name) {
-    if (typeof name === 'string') {
-        localStorage.setItem(LS_KEYS.USERNAME, name.trim());
-    }
-}
 
 // --- TRANSLATION FUNCTION (unchanged, just keep using it) ---
 function setLanguage(lang) {
@@ -103,39 +84,6 @@ function setLanguage(lang) {
 }
 
 // --- HELPERS FOR LOCALSTORAGE DATA ---
-function _getLikesMap() {
-    return JSON.parse(localStorage.getItem(LS_KEYS.LIKES) || '{}');
-}
-function _saveLikesMap(map) {
-    localStorage.setItem(LS_KEYS.LIKES, JSON.stringify(map));
-}
-function _getUserLikes() {
-    return JSON.parse(localStorage.getItem(LS_KEYS.USER_LIKES) || '{}');
-}
-function _saveUserLikes(obj) {
-    localStorage.setItem(LS_KEYS.USER_LIKES, JSON.stringify(obj));
-}
-function _getCharLikesMap() {
-    return JSON.parse(localStorage.getItem(LS_KEYS.CHAR_LIKES) || '{}');
-}
-function _saveCharLikesMap(map) {
-    localStorage.setItem(LS_KEYS.CHAR_LIKES, JSON.stringify(map));
-}
-function _getUserCharLikes() {
-    return JSON.parse(localStorage.getItem(LS_KEYS.USER_CHAR_LIKES) || '{}');
-}
-function _saveUserCharLikes(obj) {
-    localStorage.setItem(LS_KEYS.USER_CHAR_LIKES, JSON.stringify(obj));
-}
-function _getCommentsMap() {
-    return JSON.parse(localStorage.getItem(LS_KEYS.COMMENTS) || '{}');
-}
-function _saveCommentsMap(map) {
-    localStorage.setItem(LS_KEYS.COMMENTS, JSON.stringify(map));
-}
-function generateId(prefix = 'id') {
-    return prefix + '_' + Math.random().toString(36).slice(2, 9);
-}
 function escapeHtml(str = '') {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -148,8 +96,8 @@ function escapeHtml(str = '') {
 // --- RENDER & INTERACTION FUNCTIONS ---
 function displayPosts(searchQuery = '') {
     displayContent(searchQuery, myPosts, 'post-grid');
-    displayContent(searchQuery, fanartPosts, 'fanart-grid');
 }
+
 function displayContent(searchQuery, contentArray, gridId) {
     const postGrid = document.getElementById(gridId);
     if (!postGrid) return;
@@ -190,22 +138,8 @@ function displayContent(searchQuery, contentArray, gridId) {
             ${mediaElement}
             <div class="post-info"><button class="post-title-button" onclick="goToPost('${post.id}')"><h3>${escapeHtml(postTitle)}</h3></button><p>${escapeHtml(postDesc)}</p></div>
             <div class="tags-container">${tagsHTML}</div>
-            <div class="post-actions">
-                <button id="like-btn-${post.id}" class="like-btn" onclick="toggleLike('${post.id}')"></button>
-                <button onclick="sharePost('${post.id}')">${langDict.share}</button>
-            </div>
-            <div class="comments-section">
-                <h4 data-translate="comments">${langDict.comments}</h4>
-                <div class="comments-container" id="comments-${post.id}"></div>
-                <div class="add-comment-form">
-                    <textarea id="comment-input-${post.id}" placeholder="${langDict.comment_placeholder || ''}"></textarea>
-                    <button onclick="addComment('${post.id}')">${langDict.submit}</button>
-                </div>
-            </div>
         `;
         postGrid.appendChild(postElement);
-        loadComments(post.id);
-        updateLikeButton(post.id);
     });
 }
 
@@ -240,22 +174,10 @@ function loadPostDetailPage() {
         <div class="post-info"><h3>${escapeHtml(postTitle)}</h3><p>${escapeHtml(postDesc)}</p></div>
         <div class="tags-container">${tagsHTML}</div>
         <div class="post-actions">
-            <button id="like-btn-${post.id}" class="like-btn" onclick="toggleLike('${post.id}')"></button>
-            <button onclick="sharePost('${post.id}')">${langDict.share}</button>
-        </div>
-        <div class="comments-section">
-            <h4 data-translate="comments">${langDict.comments}</h4>
-            <div class="comments-container" id="comments-${post.id}"></div>
-            <div class="add-comment-form">
-                <textarea id="comment-input-${post.id}" placeholder="${langDict.comment_placeholder || ''}"></textarea>
-                <button onclick="addComment('${post.id}')">${langDict.submit}</button>
-            </div>
-        </div>
+
     `;
     container.innerHTML = '';
     container.appendChild(postElement);
-    loadComments(post.id);
-    updateLikeButton(post.id);
 }
 
 function displayCharacterGallery(searchQuery = '') {
@@ -379,10 +301,7 @@ function renderCharacterForm(charId, formId) {
             </div>
             <div class="profile-actions">
                 <div class="tags-container">${tagsHTML}</div>
-                <button id="like-btn-${character.id}" class="like-btn" onclick="toggleCharacterLike('${character.id}')"></button>
-            </div>
         `;
-        updateCharacterLikeButton(character.id);
     } catch (error) {
         console.error(`Failed to render form ${formId} for character ${charId}:`, error);
         const container = document.getElementById('character-profile-container');
@@ -390,152 +309,6 @@ function renderCharacterForm(charId, formId) {
     }
 }
 
-// --- LIKES: No account required ---
-function toggleLike(postId) {
-    let userLikes = _getUserLikes();
-    let likesMap = _getLikesMap();
-    if (userLikes[postId]) {
-        delete userLikes[postId];
-        likesMap[postId] = Math.max((likesMap[postId] || 1) - 1, 0);
-    } else {
-        userLikes[postId] = true;
-        likesMap[postId] = (likesMap[postId] || 0) + 1;
-    }
-    _saveUserLikes(userLikes);
-    _saveLikesMap(likesMap);
-    updateLikeButton(postId);
-}
-function updateLikeButton(postId) {
-    const likeButton = document.getElementById(`like-btn-${postId}`);
-    if (!likeButton) return;
-    const likesMap = _getLikesMap();
-    const userLikes = _getUserLikes();
-    const likeCount = likesMap[postId] || 0;
-    const userHasLiked = !!userLikes[postId];
-    likeButton.innerHTML = `${translations[currentLang].like || 'Like'} (${likeCount})`;
-    likeButton.classList.toggle('liked', userHasLiked);
-}
-
-// --- CHARACTER LIKES: No account required ---
-function toggleCharacterLike(charId) {
-    let userCharLikes = _getUserCharLikes();
-    let charLikesMap = _getCharLikesMap();
-    if (userCharLikes[charId]) {
-        delete userCharLikes[charId];
-        charLikesMap[charId] = Math.max((charLikesMap[charId] || 1) - 1, 0);
-    } else {
-        userCharLikes[charId] = true;
-        charLikesMap[charId] = (charLikesMap[charId] || 0) + 1;
-    }
-    _saveUserCharLikes(userCharLikes);
-    _saveCharLikesMap(charLikesMap);
-    updateCharacterLikeButton(charId);
-}
-function updateCharacterLikeButton(charId) {
-    const likeButton = document.getElementById(`like-btn-${charId}`);
-    if (!likeButton) return;
-    const charLikesMap = _getCharLikesMap();
-    const userCharLikes = _getUserCharLikes();
-    const likeCount = charLikesMap[charId] || 0;
-    const userHasLiked = !!userCharLikes[charId];
-    likeButton.innerHTML = `${translations[currentLang].like || 'Like'} (${likeCount})`;
-    likeButton.classList.toggle('liked', userHasLiked);
-}
-
-// --- COMMENTS: No account required, uses device ID and optional display name ---
-function loadComments(postId) {
-    const commentsContainer = document.getElementById(`comments-${postId}`);
-    if (!commentsContainer) return;
-    const commentsMap = _getCommentsMap();
-    const comments = commentsMap[postId] || [];
-    if (comments.length === 0) {
-        commentsContainer.innerHTML = `<p>${translations[currentLang].no_comments}</p>`;
-        return;
-    }
-    commentsContainer.innerHTML = '';
-    comments.forEach(comment => {
-        const commentElement = document.createElement('div');
-        commentElement.classList.add('comment');
-        let deleteButton = '';
-        if (comment.clientId === getClientId()) {
-            deleteButton = `<button class="delete-btn" onclick="deleteComment('${comment.id}', '${postId}')">Delete</button>`;
-        }
-        const displayName = comment.name || 'Anonymous';
-        commentElement.innerHTML = `<p><strong>${escapeHtml(displayName)}:</strong> ${escapeHtml(comment.text)}</p>${deleteButton}`;
-        commentsContainer.appendChild(commentElement);
-    });
-}
-function addComment(postId) {
-    const commentInput = document.getElementById(`comment-input-${postId}`);
-    const commentText = commentInput.value.trim();
-    if (commentText === '') {
-        alert(translations[currentLang].alert_comment_empty || "Comment cannot be empty!");
-        return;
-    }
-    const commentsMap = _getCommentsMap();
-    const newComment = {
-        id: generateId('comment'),
-        name: getUsername(),
-        text: commentText,
-        timestamp: Date.now(),
-        clientId: getClientId()
-    };
-    commentsMap[postId] = commentsMap[postId] || [];
-    commentsMap[postId].push(newComment);
-    _saveCommentsMap(commentsMap);
-    commentInput.value = '';
-    loadComments(postId);
-}
-function deleteComment(commentId, postId) {
-    const commentsMap = _getCommentsMap();
-    commentsMap[postId] = (commentsMap[postId] || []).filter(c => c.id !== commentId);
-    _saveCommentsMap(commentsMap);
-    loadComments(postId);
-}
-
-// --- USERNAME (display name, optional, local only) ---
-function saveUsername() {
-    const usernameInput = document.getElementById('username-input');
-    if (!usernameInput) return;
-    const newUsername = usernameInput.value.trim();
-    if (newUsername.length < 3) {
-        alert(translations[currentLang].alert_username_length || "Username must be at least 3 characters.");
-        return;
-    }
-    setUsername(newUsername);
-    alert(translations[currentLang].alert_username_saved || "Username saved!");
-    const welcomeMessage = document.getElementById('welcome-message');
-    if (welcomeMessage) {
-        welcomeMessage.textContent = `Welcome, ${newUsername}`;
-    }
-}
-
-// --- MAIN UI CONTROLLER ---
-function updateUIOnLoad() {
-    const username = getUsername();
-    const onIndexPage = document.getElementById('post-grid');
-    if (onIndexPage) {
-        const welcomeMessage = document.getElementById('welcome-message');
-        if (welcomeMessage) {
-            welcomeMessage.textContent = `Welcome, ${username}`;
-        }
-    }
-    // Optionally show/hide username setting UI
-}
-
-// --- SHARE POST ---
-function sharePost(postId) {
-    let post = myPosts.find(p => p.id === postId) || fanartPosts.find(p => p.id === postId);
-    if (!post) return;
-    const url = window.location.href;
-    const shareData = { title: `KennyChris's Art`, text: `Check out: "${translations[currentLang][post.titleKey]}"`, url };
-    if (navigator.share) {
-        navigator.share(shareData).catch(err => console.error('Share failed:', err));
-    } else {
-        navigator.clipboard.writeText(url);
-        alert(translations[currentLang].alert_link_copied || "Link copied!");
-    }
-}
 function copyRSSLink() {
     const rssUrl = window.location.origin + '/feed.xml';
     navigator.clipboard.writeText(rssUrl).then(() => {
@@ -592,14 +365,4 @@ document.addEventListener('DOMContentLoaded', () => {
             displayCharacterGallery(characterSearchInput.value);
         });
     }
-
-    // Username set
-    const usernameInput = document.getElementById('username-input');
-    const usernameBtn = document.getElementById('username-btn');
-    if (usernameInput && usernameBtn) {
-        usernameInput.value = getUsername();
-        usernameBtn.addEventListener('click', saveUsername);
-    }
-
-    updateUIOnLoad();
 });
