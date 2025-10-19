@@ -6,10 +6,34 @@
     <description>KennyChris's Latest Posts</description>
     
     <item>
+      <title>New Page Added</title>
+      <link>https://kennychris.nekoweb.org/about</link>
+      <description><![CDATA[A new "About Me" page has been made alongside some other improvements!]]></description>
+      <pubDate>Sat, 18 Oct 2025 08:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/about</guid>
+    </item>
+
+    <item>
+      <title>New Website Update</title>
+      <link>https://kennychris.nekoweb.org/guestbook</link>
+      <description><![CDATA[No more likes or comments, nor the fanart submission feature... but instead we got a guestbook!]]></description>
+      <pubDate>Fri, 17 Oct 2025 10:20:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/guestbook</guid>
+    </item>
+
+    <item>
+      <title>New Character: Miinx</title>
+      <link>https://kennychris.nekoweb.org/character-profile?id=miinx</link>
+      <description><![CDATA[Check out my new character's profile now!]]></description>
+      <pubDate>Thu, 16 Oct 2025 09:20:00 GMT</pubDate>
+      <guid isPermaLink="true">https://kennychris.nekoweb.org/character-profile?id=miinx</guid>
+    </item>
+
+    <item>
       <title>New Character: Fido</title>
       <link>https://kennychris.nekoweb.org/character-profile?id=fido</link>
       <description><![CDATA[Check out my new character's profile now!]]></description>
-      <pubDate>Wed, 15 oct 2025 18:40:00 GMT</pubDate>
+      <pubDate>Wed, 15 Oct 2025 18:40:00 GMT</pubDate>
       <guid isPermaLink="true">https://kennychris.nekoweb.org/character-profile?id=fido</guid>
     </item>
 
