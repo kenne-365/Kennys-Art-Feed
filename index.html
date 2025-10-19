@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="style.css?v=31">
+    <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="Kenny's Art Feed" href="feed.xml">
 </head>
 <body class="homepage">
@@ -25,27 +25,26 @@
     </header>
 
     <main>
-        <div class="search-container">
-            <input type="search" id="search-input" class="search-input" data-translate-placeholder="search_placeholder">
-        </div>
 
         <div class="main-nav">
+            <a href="about.html" class="nav-link" data-translate="about_me">About Me</a>
             <a href="characters.html" class="nav-link" data-translate="characters_title">Characters</a>
+            <a href="guestbook.html" class="nav-link" data-translate="guestbook">Guestbook</a>
+        </div>
+        
+        <div class="search-container">
+            <input type="search" id="search-input" class="search-input" data-translate-placeholder="search_placeholder">
         </div>
         
         <h2 data-translate="latest_posts">Latest Posts</h2>
         <div id="post-grid" class="post-container"></div>
-
-        <h2 data-translate="fanart_showcase">Fanart Showcase</h2>
-        <div id="fanart-grid" class="post-container"></div>
     </main>
 
     <footer>
-        <a href="fanart.html" class="nav-link" data-translate="fanart_submission">Submit Your Fanart!</a>
         <p style="margin-top: 20px;" data-translate="copyright">&copy; 2025 KennyChris. All rights reserved.</p>
     </footer>
     
-    <script src="translations.js?v=29"></script>
-    <script src="app.js?v=29"></script>
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
