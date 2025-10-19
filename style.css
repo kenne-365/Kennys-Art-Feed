@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @font-face {
   font-family: 'SilverLining';
-  src: url('fonts/silverlining.woff2') format('woff2');
+  src: url('silverlining.woff2') format('woff2');
 }
 
 /* General Body Styles */
@@ -135,19 +135,10 @@ input, select, textarea { padding: 10px; border-radius: 5px; border: 2px solid #
 
 /* Other Styles */
 .hidden { display: none; }
-.comments-section { padding: 15px; border-top: 2px solid #7A66FF; text-align: left; }
-.comments-section h4 { font-size: 1.3em; }
-.comment { background-color: #1a1a2e; padding: 10px; border-radius: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-.comment p { margin: 0; line-height: 1.5; }
-.comment p strong { color: #9EFF66; }
-.add-comment-form textarea { width: 100%; box-sizing: border-box; min-height: 60px; background-color: #1a1a2e; color: white; }
-.delete-btn { background-color: #ff4d4d; border: none; font-size: 12px; padding: 5px 10px; }
-.like-btn.liked { background-color: #9EFF66; color: #1a1a2e; border-color: #9EFF66; box-shadow: 0px 0px 10px #FFFFFF; }
 .form-group { margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto; text-align: left; }
 .form-group label { display: block; margin-bottom: 5px; color: #9EFF66; font-family: 'Press Start 2P', cursive; }
 .form-group select, .form-group input[type="text"], .form-group input[type="file"] { width: 100%; box-sizing: border-box; background-color: #2e2e50; color: #FFFFFF; }
-.submit-btn { padding: 15px 30px; font-size: 1.2em; }
-.nav-link { display: inline-block; color: #FFFFFF; background-color: #FF66EB; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.8em; margin-top: 0; }
+.nav-link { display: inline-block; color: #FFFFFF; background-color: #FF66EB; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.8em; margin-top: 0;}
 .nav-link:hover { background-color: #9EFF66; color: #1a1a2e; }
 .form-group small { display: block; margin-top: 5px; color: #FF66EB; font-family: 'VT323', monospace; }
 .search-input { width: 100%; max-width: 600px; padding: 15px; font-size: 1.1em; border-radius: 8px; border: 3px solid #7A66FF; background-color: #2e2e50; color: #FFFFFF; box-shadow: 0px 0px 15px #7A66FF; }
@@ -162,7 +153,7 @@ input, select, textarea { padding: 10px; border-radius: 5px; border: 2px solid #
 .post-title-button { background-color: transparent; border: none; outline: none; padding: 0; margin: 0; font-family: inherit; color: inherit; cursor: pointer; text-align: center; width: 100%; }
 .post-title-button h3 { color: #9EFF66; transition: color 0.3s; margin: 0; padding: 0; font-size: 1.3em; }
 .post-title-button:hover h3 { color: #FF66EB; }
-.main-nav { margin-bottom: 30px; }
+.main-nav { margin-bottom: 20px; }
 
 /* Character Page Styles */
 #character-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
@@ -185,28 +176,35 @@ input, select, textarea { padding: 10px; border-radius: 5px; border: 2px solid #
 .profile-description-area .quote { font-style: italic; opacity: 0.8; text-align: center; margin: 20px 0; }
 .profile-description-area p { margin: 1em 0; }
 .profile-actions { text-align: center; }
-.likes-section { margin-top: 50px; padding-top: 30px; border-top: 5px solid #9EFF66; text-align: center; }
-.likes-section h3 { font-size: 1.2em; text-align: left; }
-.liked-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-bottom: 30px; }
-.liked-item-card { background-color: #2e2e50; border: 2px solid #7A66FF; border-radius: 8px; text-decoration: none; color: #FFFFFF; font-family: 'VT323', monospace; transition: transform 0.2s; }
-.liked-item-card:hover { transform: scale(1.05); }
-.liked-item-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px 6px 0 0; }
-.liked-item-card p { margin: 8px; font-size: 0.9em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #form-tabs-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 .form-tab { font-family: 'Press Start 2P', cursive; font-size: 0.9em; padding: 10px 15px; cursor: pointer; background-color: #2e2e50; border: 2px solid #7A66FF; color: #7A66FF; border-radius: 8px; transition: all 0.3s; }
 .form-tab.active, .form-tab:hover { background-color: #9EFF66; color: #1a1a2e; border-color: #9EFF66; }
-.notification-dot { color: #9EFF66; font-size: 2em; text-decoration: none; text-shadow: 0 0 10px #9EFF66, 0 0 20px #9EFF66; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
-
-/* Responsive Rules                                */
+.introduction-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.introduction-section p {
+    flex: 1;
+    text-align: left;
+    margin: 0;
+}
+.pagedoll-image {
+    flex-shrink: 0;
+    max-width: 300px;
+    height: auto;
+}
+/* Responsive Rules  */
 /* For DESKTOP screens (768px and wider) */
 @media screen and (min-width: 768px) {
     .profile-main-content {
         grid-template-columns: 1fr 1fr;
-        /* This correctly centers the ref sheet and info box vertically */
         align-items: center; 
     }
+    
 }
 
 /* For MOBILE screens (768px and narrower) */
@@ -219,21 +217,13 @@ input, select, textarea { padding: 10px; border-radius: 5px; border: 2px solid #
         flex-wrap: wrap;
         justify-content: center;
     }
+    .nav-link {
+      margin-bottom: 10px;
+    }
+    h2 {
+    font-size: 20px;
+    }
+   
 }
 /* Remove underline from the downloadable ref sheet link */
-.profile-ref-sheet a {
-    text-decoration: none;
-}
-
-/* Botón RSS Especial */
-.submit-btn.rss-btn {
-    position: relative;
-    background-color: #FF66EB;
-    border: 2px solid #FFFFFF;
-    color: #FFFFFF;
-}
-
-.submit-btn.rss-btn:hover {
-    background-color: #9EFF66;
-    color: #1a1a2e;
-}
+.profile-ref-sheet a {text-decoration: none;}
