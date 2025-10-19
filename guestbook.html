@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook - Kenny's Art Feed</title>
+
+    <meta property="og:title" content="Kenny's Art Feed!">
+    <meta property="og:description" content="Kenny's personal website for art, characters, and animations.">
+    <meta property="og:image" content="https://kennychris.nekoweb.org/embed_thumbnail.png">
+    <meta property="og:url" content="https://kennychris.nekoweb.org">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="Kenny's Art Feed" href="feed.xml">
+</head>
+<body>
+
+    <header>
+        <h1 data-translate="guestbook_title">Guestbook</h1>
+        <nav>
+            <a href="index.html" class="nav-link" data-translate="nav_home">← Back to Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 data-translate="guestbook_description">Leave a mark in my guestbook!</h2>
+        <p data-translate="guestbook_desc">Feel free to leave your thoughts, messages, or feedback. Your entries will be displayed here!</p>
+
+        <div id="guestbook-iframe-container">
+            <iframe src="https://kennychris.atabook.org/" width="100%" height="800" frameborder="0"></iframe>
+    </main>
+
+    <footer>
+        <p data-translate="copyright">&copy; 2025 KennyChris. All rights reserved.</p>
+    </footer>
+
+    <script src="translations.js"></script> 
+    <script src="app.js"></script>
+</body>
+</html>
