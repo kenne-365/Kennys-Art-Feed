@@ -22,61 +22,20 @@ const translations = {
     share: "Share",
     submit: "Submit",
     copyright: "© 2025 KennyChris. All rights reserved.",
-    
-    // --- RSS Page ---
-    subscribe_rss: "Subscribe to the RSS",
-    rss_copy_prompt: "Press the button below to copy the RSS link and put it on your RSS reader!",
-    alert_rss_copied: "The RSS feed link has been copied to your clipboard!",
 
-    // --- Fanart Page ---
-    fanart_submission: "Fanart Submission",
-    send_fanart_title: "Send Your Fanart!",
-    send_fanart_desc: "I'd love to see your creations! Fill out the form below to send your fanart directly to me. I'll post my favorites on the site and credit you using the social media info you provide.",
-    social_platform: "Social Media Platform:",
-    your_username: "Your Username:",
-    your_fanart_image: "Your Fanart Image:",
-    max_file_size: "Max file size: 5MB",
-    send_fanart_button: "Send Fanart",
+    // --- Guestbook Page ---
+    guestbook: "Guestbook",
+    guestbook_description: "Leave a mark in my guestbook!",
+    guestbook_desc: "Feel free to leave your thoughts, messages, or feedback. All entries will be displayed here!",
+    
+    // --- About Me Page ---
+    about_title: "About Me",
+    about_me: "About Me",
+    introduction: "Introduction:",
+    fandoms: "Fandoms I'm In:",
+    discord: "My Discord",
+    about_introduction: "Hello! You may already know this, but my name is Kenny!\n\nI'm a 20 y/o artist from Uruguay, and I draw or make animations whenever I have the motivation to do them... Be patient with me!\n\nI love most forms of art: digital, traditional, animation, music, 3D modeling... And maybe so many others!\n\nI'm tired of social media accounts, honestly... So I entered the Indie Web community and made my very own website!\n\nHere you will see some of my stuff, just take a seat and stay with me inside my own fantasy world in the middle of hell!",
 
-    // --- Thanks Page ---
-    submission_received: "Submission Received!",
-    thank_you: "Thank You!",
-    thank_you_desc: "Your fanart has been sent. Thank you so much for sharing your creativity!",
-    go_back_home: "← Go Back to the Main Page",
-
-    // --- Alerts & Messages ---
-    alert_like: "You must be logged in to like posts!",
-    alert_comment: "You must be logged in to comment!",
-    alert_comment_empty: "Comment cannot be empty.",
-    alert_username_length: "Username must be at least 3 characters long.",
-    alert_username_saved: "Username saved successfully!",
-    alert_username_error: "Could not save username.",
-    alert_link_copied: "Link to the site has been copied to your clipboard!",
-    alert_login_protected: "You must be logged in to view this page.",
-    no_comments: "No comments yet. Be the first!",
-    loading_comments: "Loading comments...",
-    error_load_comments: "Could not load comments.",
-    no_likes: "No one has liked this post yet.",
-    loading_likes: "Loading...",
-    error_load_likes: "Could not load likes.",
-    adblock_warning: "Network error! Please check your internet connection or try disabling your ad-blocker, as it might be interfering with the login service.",
-    
-    // --- Fanart Showcase ---
-    fanart_showcase: "Fanart Showcase",
-    fanart_title_001: "Gaggle Fanart by Alex",
-    fanart_desc_001: "A cool drawing of Dr. Gaggle sent in by Alex on X (Twitter)!",
-    no_posts_yet: "No Posts Yet!",
-    
-    // --- Username Alert ---
-    alert_username_taken: "That username is already taken. Please choose another.",
-    
-    // --- My Likes ---
-    my_likes: "My Likes",
-    posts: "Posts",
-    fanart: "Fanart",
-    characters: "Characters",
-    no_liked_items: "You haven't liked any items in this category yet.",
-    
     // --- Characters ---
     characters_title: "Characters",
     info_fullName: "Full Name",
@@ -133,6 +92,24 @@ const translations = {
     char_fido_quote: "\"I just want to make the world a better place!... And a better dance floor!\"",
     char_fido_description: "Fido is really famous on TV for his job as an independent DJ and his carefree personality! \nHe's confident, kind, sweet and loyal to his friends, especially his crush Miinx.\nHe may be clumsy sometimes, and can be really honest too.\nHe likes dino nuggets, pizza (only with mozzarella) and orange juice! But dislikes cheddar cheese.\nHe's also a picky eater and hates soggy textures on food.\nHe's really good at rhythm games.\nHe loves dancing and is very good at it.\nHe hates being quiet or doing boring stuff, it drains him.\nHe can act generous by impulse and without thinking about it first.\nHe's too sensitive to criticism.\nHe gets easily distracted by lights, noise or even tunes.\ngear malfunctioning or sound issues are definitely his nightmare.\nHe can’t do anything without background music playing on a radio or his headphones.",
     char_fido_designNotes: "- Please draw him WITH CLOTHES, you can design him all the clothes you want!\n- Make sure his hairstyle remains THE SAME, unless you want to make him a new hairstyle, then go ahead!\n- He has @ sings on his eyes that can change to other sings depending on his emotions.\n- ALWAYS draw him with an AVERAGE body build.\n- He has NO INNER MOUTH.\n- His marks are NOT OPTIONAL. \n- His articulations are NOT OPTIONAL.",
+
+    // Miinx's Specific Info
+    char_name_miinx: "Miinx",
+    char_miinx_fullName: "Miinx Sparklee",
+    char_miinx_species: "Alien",
+    char_miinx_age: "Ageless",
+    char_miinx_gender: "Female",
+    char_miinx_pronouns: "She/They/It",
+    char_miinx_sexuality: "Bisexual",
+    char_miinx_status: "Single",
+    char_miinx_height: "5' 3\"",
+    char_miinx_weight: "119 lb",
+    char_miinx_build: "Average",
+    char_miinx_occupation: "Pop Idol",
+    char_miinx_language: "American English",
+    char_miinx_quote: "\"You better stand up, because the drop is going LOUD!\"",
+    char_miinx_description: "Miinx is a flirtatious, bossy and grumpy alien, but she can be very lovely and kind. \nShe's really sensitive, and cries for (nearly) everything, be careful with what you say to her.\nShe loves her friends a lot, Especially Fido.\nMiinx is really good at drawing and dancing, and is a well-known Pop Idol in town.\nShe loves Japanese street fashion, especially Decora Kei, and listens to Jumpstyle music.\nShe's very dramatic.\nShe will defend her friends at all cost if needed.\nIf she went to a restaurant and her food is not like she ordered, she may get angry at the waiter and the chef.\nThe same can happen when her friends' food is not right, knowing that Fido is a picky eater.\nShe can manipulate people to get everything done her way.\nShe loves customizing everything she finds.\nShe can naturally strike a good looking, appealing pose without realizing it.\nEven if unintentional, she always has a way of making her presence known.\nShe listens to music that matches her mood; if angry, she will listen to baby metal.",
+    char_miinx_designNotes: "- Please draw her WITH CLOTHES, you can design him all the clothes you want!\n- Make sure her hairstyle remains THE SAME, unless you want to make her a new hairstyle, then go ahead!\n- ALWAYS draw her with an AVERAGE body build.\n- Her freckles are NOT OPTIONAL.\n- Her glasses are NOT OPTIONAL.\n- Her hair pins are OPTIONAL. \n- Her feet hooves are NOT OPTIONAL.\n- ALWAYS draw her with colorful, vibrant clothes.",
 
     // Lane's Specific Info
     char_name_lane: "Lane",
@@ -198,7 +175,7 @@ const translations = {
     post_desc_001: "Aquí hay un fanart que hice del Dr. Gaggle de Something Bad Will Happen Soon en Roblox.",
     post_title_002: "Cuida de Esto",
     post_desc_002: "¡Otro fanart de Something Bad Will Happen Soon, esta vez incluye a N0S3NS3, mi propio OC de SBWHS!",
-    post_title_003: "Meme de Animación Bi",
+    post_title_003: "Meme Animado: Bi",
     post_desc_003: "¡Un meme de animación que hice usando solo la herramienta de vectores en Alight Motion!",
     post_title_004: "En la Noche",
     post_desc_004: "Hoy les mostraré un dibujo de Axel en el medio de la ciudad... ¿Por qué tan tarde, Axel?",
@@ -217,74 +194,19 @@ const translations = {
     login_signup: "Inicia Sesión / Regístrate",
     copyright: "© 2025 KennyChris. Todos los derechos reservados.",
 
-    // --- Página de Inicio de Sesión ---
-    account_access: "Accede a la Cuenta",
-    login_or_signup: "Inicia Sesión o Regístrate",
-    login: "Inicia Sesión",
-    signup: "Regístrate",
-    signin_google: "Iniciar sesión con Google",
+    // --- Página del Guestbook ---
+    guestbook: "Guestbook",
+    guestbook_description: "¡Deja una huella en mi guestbook!",
+    guestbook_desc: "Siéntete libre de dejar tus opiniones, mensajes o comentarios. ¡Todos los mensajes se mostrarán aquí!",
+        
+    // --- Página Sobre Mí ---
+    about_title: "Sobre Mi",
+    about_me: "Sobre Mí",
+    introduction: "Introducción:",
+    fandoms: "Fandoms En Los Que Estoy:",
+    discord: "Mi Discord",
+    about_introduction: "¡Hola! Puede que ya lo sepas, pero mi nombre es Kenny!\n\nSoy un artista de 20 años en Uruguay, y dibujo o hago animaciones cuando tengo la motivación para hacerlo... ¡Sean pacientes conmigo!\n\nMe gustan la mayoría de los medios de arte: digital, tradicional, animación, música, modelado 3D... ¡Y quizás muchos otros más!\n\nEstoy cansado de las redes sociales, honestamente... Así que entré en la comunidad Indie Web y hice mi propia página!\n\nAquí verán algunas de mis cosas, solo tomen asiento y quédense conmigo dentro de mi propio mundo de fantasía en el medio del infierno!",
 
-    // --- Página de Perfil ---
-    manage_profile: "Gestionar Perfil",
-    your_details: "Tus Datos",
-    email: "Correo Electrónico",
-    username: "Nombre de Usuario",
-    username_desc: "Tu nombre público para los comentarios. Debe tener al menos 3 carácteres.",
-    save_username: "Guardar Usuario",
-    welcome_new_user: "¡Bienvenidx! Por favor, elige un nombre de usuario para continuar.",
-
-    // --- Página RSS ---
-    subscribe_rss: "Suscribirse al RSS",
-    rss_copy_prompt: "¡Presiona el botón de abajo para copiar el enlace RSS y pegarlo en tu lector de RSS!",
-    alert_rss_copied: "¡El enlace al feed RSS ha sido copiado a tu portapapeles!",
-
-    // --- Página de Fanart ---
-    fanart_submission: "Envíame Fanart",
-    send_fanart_title: "¡Envía tu Fanart!",
-    send_fanart_desc: "¡Me encantaría ver tus creaciones! Completa el formulario para enviarme tu fanart directamente. Publicaré mis favoritos en el sitio y te daré crédito usando la información que proporciones.",
-    social_platform: "Red Social:",
-    your_username: "Tu Nombre de Usuario:",
-    your_fanart_image: "Tu Fanart:",
-    max_file_size: "Tamaño máximo: 5MB",
-    send_fanart_button: "Enviar Fanart",
-
-    // --- Página de Agradecimiento ---
-    submission_received: "¡Envío Recibido!",
-    thank_you: "¡Gracias!",
-    thank_you_desc: "Tu fanart ha sido enviado. ¡Muchas gracias por compartir tu creatividad!",
-    go_back_home: "← Volver a la Página Principal",
-    
-    // --- Alertas y Mensajes ---
-    alert_like: "¡Debes iniciar sesión para dar me gusta!",
-    alert_comment: "¡Debes iniciar sesión para comentar!",
-    alert_comment_empty: "El comentario no puede estar vacío.",
-    alert_username_length: "El nombre de usuario debe tener al menos 3 caracteres.",
-    alert_username_saved: "¡Nombre de usuario guardado con éxito!",
-    alert_username_error: "No se pudo guardar el nombre de usuario.",
-    alert_link_copied: "¡El enlace al sitio ha sido copiado a tu portapapeles!",
-    alert_login_protected: "Debes iniciar sesión para ver esta página.",
-    no_comments: "Aún no hay comentarios. ¡Sé el primero!",
-    loading_comments: "Cargando comentarios...",
-    error_load_comments: "No se pudieron cargar los comentarios.",
-    no_likes: "A nadie le ha gustado esta publicación todavía.",
-    loading_likes: "Cargando...",
-    error_load_likes: "No se pudieron cargar los 'me gusta'.",
-    adblock_warning: "¡Error de red! Revisa tu conexión a internet o intenta desactivar tu bloqueador de anuncios, ya que podría estar interfiriendo con el servicio de inicio de sesión.",
-    
-    // --- Galería de Fanart ---
-    fanart_showcase: "Galería de Fanart",
-    no_posts_yet: "¡Aún No Hay Publicaciones!",
-    
-    // --- Alerta de Usuario ---
-    alert_username_taken: "Ese nombre de usuario ya está en uso. Por favor, elige otro.",
-    
-    // --- Mis Me Gusta ---
-    my_likes: "Mis Me Gusta",
-    posts: "Publicaciones",
-    fanart: "Fanart",
-    characters: "Personajes",
-    no_liked_items: "Aún no te ha gustado nada en esta categoría.",
-    
     // --- Personajes ---
     characters_title: "Personajes",
     info_fullName: "Nombre Completo",
@@ -341,6 +263,24 @@ const translations = {
     char_fido_quote: "\"¡Solo quiero hacer del mundo un lugar mejor!... ¡Y una mejor pista de baile!\"",
     char_fido_description: "¡Fido es realmente famoso en la televisión por su trabajo como DJ independiente y su personalidad despreocupada!\n Es seguro de sí mismo, amable, dulce y leal con sus amigos, especialmente con su crush Miinx. \nPuede ser torpe a veces y también puede ser muy honesto. \nLe gustan los nuggets de dinosaurio, la pizza (solo con mozzarella) y el jugo de naranja, ¡pero no le gusta el queso cheddar! \nTambién es un comensal exigente y odia las texturas blandas en la comida. \nEs muy bueno en los juegos de ritmo. \nLe encanta bailar y es muy bueno en ello.\n Odia estar en silencio o hacer cosas aburridas, eso lo agota.\nPuede actuar de manera generosa por impulso y sin pensar primero.\nEs demasiado sensible a las críticas. \nSe distrae fácilmente con luces, ruidos o incluso con melodías. \nLas fallas en el equipo o problemas de sonido definitivamente son su pesadilla. \nNo puede hacer nada sin música de fondo que suene en la radio o en sus auriculares.",
     char_fido_designNotes: "- Por favor, dibújalo CON ROPA, ¡puedes diseñarle toda la ropa que quieras! \n- Asegúrate de que su peinado permanezca IGUAL, ¡a menos que quieras darle un peinado nuevo, entonces adelante! \n- Tiene @s en sus ojos que pueden cambiar a otros signos dependiendo de sus emociones. \n- SIEMPRE dibújalo con un cuerpo de complexión PROMEDIO. \n- NO tiene BOCA INTERNA. \n- Sus marcas NO SON OPCIONALES. \n- Sus articulaciones NO SON OPCIONALES.",
+
+    // Información Específica de Miinx
+    char_name_miinx: "Miinx",
+    char_miinx_fullName: "Miinx Sparklee",
+    char_miinx_species: "Alien",
+    char_miinx_age: "Sin edad",
+    char_miinx_gender: "Femenino",
+    char_miinx_pronouns: "Ella/Elle",
+    char_miinx_sexuality: "Bisexual",
+    char_miinx_status: "Soltera",
+    char_miinx_height: "160 cm",
+    char_miinx_weight: "53 kg",
+    char_miinx_build: "Promedio",
+    char_miinx_occupation: "Ídola Pop",
+    char_miinx_language: "Inglés Americano",
+    char_miinx_quote: "\"Será mejor que se pongan de pie, ¡porque el drop va a estar FUERTE!\"",
+    char_miinx_description: "Miinx es una alienígena coqueta, mandona y gruñona, pero puede ser muy encantadora y amable.\nElla es muy sensible y llora por casi todo, ten cuidado con lo que le dices.\nElla ama mucho a sus amigos, especialmente a Fido.\nMiinx es realmente buena dibujando y bailando, y es una famosa ídolo pop en la ciudad.\nElla ama la moda callejera japonesa, especialmente Decora Kei, y escucha música Jumpstyle.\nElla es super dramática.\nElla defenderá a sus amigos a toda costa si es necesario.\nSi ella fuera a un restaurante y su comida no es como la pidió, se enojará con el camarero y el chef.\nLo mismo puede suceder cuando la comida de sus amigos no es la adecuada, sabiendo que Fido es exigente con su comida.\nElla puede manipular a las personas para conseguir que todo se haga a su manera.\nA ella le encanta personalizar todo lo que encuentra.\nElla puede posar espontáneamente de forma atractiva y agradable sin darse cuenta.\nIncluso si es involuntario, siempre tiene una manera de hacerse notar.\nElla escucha música que coincide con su estado de ánimo; si está enojada, escuchará baby metal.",
+    char_miinx_designNotes: "- Por favor, dibújala CON ROPA, ¡puedes diseñarle toda la ropa que quieras!\n- Asegúrate de que su peinado permanezca IGUAL, ¡a menos que quieras darle un peinado nuevo, entonces adelante!\n- SIEMPRE dibújala con un cuerpo de complexión PROMEDIO. \n- HSus pecas NO SON OPCIONALES.\n- Sus gafas NO SON OPCIONALES.\n- Sus horquillas son OPCIONALES. \n- Sus pezuñas NO SON OPCIONALES.\n- SIEMPRE dibújala con ropa colorida y vibrante.",
 
     // Información Específica de Lane
     char_name_lane: "Lane",
